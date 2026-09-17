@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script src="./image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #ffffff; color: #111111; font-family: Montserrat, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #E30613; text-decoration: none; }
+  a:hover { color: #b0040f; }
+  input, select, button, textarea { font-family: inherit; }
+  [data-wrap] { max-width: 520px; }
+  [data-grid] { grid-template-columns: 1fr; }
+  @media (min-width: 760px) {
+    [data-wrap] { max-width: 900px; }
+    [data-grid] { grid-template-columns: 1fr 1fr; }
+    [data-cover] { height: 260px; }
+  }
+  @media (min-width: 1120px) {
+    [data-wrap] { max-width: 1120px; }
+    [data-grid] { grid-template-columns: 1fr 1fr 1fr; }
+    [data-cover] { height: 320px; }
+  }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: #fff; padding-bottom: 96px">
+
+  <header style="position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid #f0eceb">
+    <div data-wrap="" style="margin: 0 auto; padding: 12px 18px; display: flex; align-items: center; gap: 12px">
+      <img src="./logo-santtini-mark.svg" alt="Santtini" style="width: 30px; height: 30px; flex: none" />
+      <div style="display: flex; flex-direction: column; gap: 1px; margin-right: auto">
+        <span style="font-family: Montserrat, sans-serif; font-weight: 600; font-size: 19px; line-height: 1.05; letter-spacing: 0.01em">Restaurante Santtini</span>
+        <span style="font-size: 11.5px; letter-spacing: 0.09em; text-transform: uppercase; color: #8a8180">Almoço · 11h às 14h</span>
+      </div>
+      <button onClick="{{ openSheet }}" style="border: 0; background: #E30613; color: #fff; font-size: 14px; font-weight: 600; padding: 10px 16px; border-radius: 999px; cursor: pointer" style-hover="background: #b0040f">Reservar</button>
+    </div>
+  </header>
+
+  <section data-wrap="" style="margin: 0 auto; padding: 18px 18px 8px">
+    <div data-cover="" style="position: relative; height: 200px; border-radius: 18px; overflow: hidden; background: #f6f2f1">
+      <image-slot id="santtini-cover" shape="rect" src="./uploads/juicy-beef-steak-with-grilled-vegetables-board.jpg" placeholder="Arraste uma foto do salão ou do buffet"></image-slot>
+      <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 62%; background: linear-gradient(to top, rgba(0,0,0,0.62), rgba(0,0,0,0)); pointer-events: none"></div>
+      <img src="./logo-santtini.svg" alt="Restaurante Santtini" style="position: absolute; left: 18px; bottom: 16px; height: 34px; filter: brightness(0) invert(1); pointer-events: none" />
+    </div>
+    <p style="margin: 16px 2px 0; font-family: Montserrat, sans-serif; font-weight: 600; font-size: 23px; line-height: 1.2; max-width: 20em; text-wrap: pretty">Almoço servido diariamente. Reserve sua mesa em poucos toques.</p>
+  </section>
+
+  <nav style="position: sticky; top: 55px; z-index: 20; background: #fff; border-bottom: 1px solid #f0eceb">
+    <div data-wrap="" style="margin: 0 auto; padding: 10px 18px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none">
+      <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="4">
+        <button onClick="{{ tab.go }}" style="{{ tab.style }}" style-hover="border-color: #E30613">{{ tab.label }}</button>
+      </sc-for>
+    </div>
+  </nav>
+
+  <main data-wrap="" style="margin: 0 auto; padding: 4px 18px 0">
+    <sc-for list="{{ sections }}" as="sec" hint-placeholder-count="3">
+      <section id="{{ sec.id }}" style="scroll-margin-top: 120px; padding: 26px 0 6px">
+        <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px">
+          <h2 style="margin: 0; color: #E30613; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 21px; text-transform: uppercase; letter-spacing: 0.01em">{{ sec.title }}</h2>
+          <span style="height: 1px; flex: 1; background: #f0eceb"></span>
+        </div>
+        <p style="margin: 0 0 16px; font-size: 14px; color: #8a8180">{{ sec.note }}</p>
+        <div data-grid="" style="display: grid; gap: 12px">
+          <sc-for list="{{ sec.items }}" as="item" hint-placeholder-count="4">
+            <article style="display: flex; align-items: center; gap: 14px; border: 1px solid #f0eceb; border-radius: 16px; padding: 12px 16px; min-height: 74px; background: #fff" style-hover="border-color: #e6dedc">
+              <sc-if value="{{ item.photo }}" hint-placeholder-val="{{ false }}">
+                <image-slot id="{{ item.slot }}" src="{{ item.src }}" shape="rounded" radius="12" style="width: 74px; height: 74px; flex: none" placeholder="Foto"></image-slot>
+              </sc-if>
+              <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+                <h3 style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.25; color: #111">{{ item.name }}</h3>
+                <span style="font-size: 12px; letter-spacing: 0.07em; text-transform: uppercase; color: #b3aaa8">{{ item.kind }}</span>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </section>
+    </sc-for>
+
+    <p style="margin: 32px 2px 0; font-size: 13px; line-height: 1.6; color: #8a8180">Cardápio informativo, sujeito a alterações diárias conforme a disponibilidade da cozinha.</p>
+  </main>
+
+  <div style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-top: 1px solid #f0eceb">
+    <div data-wrap="" style="margin: 0 auto; padding: 12px 18px; display: flex; align-items: center; gap: 14px">
+      <div style="display: flex; flex-direction: column; margin-right: auto">
+        <span style="font-size: 14px; font-weight: 600">Reserva de mesa</span>
+        <span style="font-size: 12.5px; color: #8a8180">Confirmação pelo WhatsApp</span>
+      </div>
+      <button onClick="{{ openSheet }}" style="border: 0; background: #E30613; color: #fff; font-size: 15px; font-weight: 600; padding: 13px 22px; border-radius: 999px; cursor: pointer; white-space: nowrap" style-hover="background: #b0040f">Reservar mesa</button>
+    </div>
+  </div>
+
+  <sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeSheet }}" style="position: fixed; inset: 0; z-index: 50; background: rgba(17,17,17,0.42); display: flex; align-items: flex-end; justify-content: center">
+      <div onClick="{{ stop }}" style="width: 100%; max-width: 520px; background: #fff; border-radius: 22px 22px 0 0; padding: 22px 20px 24px; max-height: 92vh; overflow-y: auto">
+        <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 18px">
+          <div style="margin-right: auto">
+            <h2 style="margin: 0; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 22px; color: #E30613">Reservar mesa</h2>
+            <p style="margin: 4px 0 0; font-size: 13.5px; color: #8a8180">Almoço das 11h às 14h</p>
+          </div>
+          <button onClick="{{ closeSheet }}" aria-label="Fechar" style="border: 1px solid #f0eceb; background: #fff; width: 36px; height: 36px; border-radius: 999px; font-size: 17px; line-height: 1; cursor: pointer; color: #8a8180">×</button>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 18px">
+          <label style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8180">Nome</span>
+            <input value="{{ name }}" onChange="{{ setName }}" placeholder="Seu nome" style="border: 1px solid #e6dedc; border-radius: 12px; padding: 13px 14px; font-size: 16px; color: #111; outline: none" style-focus="border-color: #E30613" />
+          </label>
+
+          <label style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8180">Data</span>
+            <input type="date" value="{{ date }}" onChange="{{ setDate }}" style="border: 1px solid #e6dedc; border-radius: 12px; padding: 13px 14px; font-size: 16px; color: #111; outline: none" style-focus="border-color: #E30613" />
+          </label>
+
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8180">Horário</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <sc-for list="{{ times }}" as="t" hint-placeholder-count="6">
+                <button onClick="{{ t.pick }}" style="{{ t.style }}">{{ t.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8180">Pessoas</span>
+            <div style="display: flex; align-items: center; gap: 18px; border: 1px solid #e6dedc; border-radius: 12px; padding: 8px 14px; width: max-content">
+              <button onClick="{{ less }}" aria-label="Menos pessoas" style="border: 0; background: #faf7f6; color: #E30613; width: 40px; height: 40px; border-radius: 999px; font-size: 20px; cursor: pointer">−</button>
+              <span style="font-size: 17px; font-weight: 600; min-width: 84px; text-align: center">{{ peopleLabel }}</span>
+              <button onClick="{{ more }}" aria-label="Mais pessoas" style="border: 0; background: #faf7f6; color: #E30613; width: 40px; height: 40px; border-radius: 999px; font-size: 20px; cursor: pointer">+</button>
+            </div>
+          </div>
+
+          <label style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8180">Observação <span style="text-transform: none; letter-spacing: 0; color: #b3aaa8">(opcional)</span></span>
+            <textarea value="{{ obs }}" onChange="{{ setObs }}" rows="2" placeholder="Aniversário, cadeira de bebê, restrição alimentar…" style="border: 1px solid #e6dedc; border-radius: 12px; padding: 13px 14px; font-size: 16px; color: #111; outline: none; resize: none" style-focus="border-color: #E30613"></textarea>
+          </label>
+
+          <a href="{{ waLink }}" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: #E30613; color: #fff; font-size: 16px; font-weight: 600; padding: 16px; border-radius: 14px" style-hover="background: #b0040f; color: #fff">Enviar reserva pelo WhatsApp</a>
+          <p style="margin: -6px 0 0; font-size: 12.5px; color: #b3aaa8; text-align: center">A reserva é confirmada na resposta do restaurante.</p>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5511999999999&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Reserva&quot;}}">
+const MENU = [
+  { id: "pratos-do-dia", title: "Pratos do dia", note: "Servidos no almoço, das 11h às 14h.", items: [
+    { name: "Frango grill vinagrete", kind: "Prato principal", photo: true, src: "./uploads/pasted-1787774686804-0.png" },
+    { name: "Tilápia crocante panko", kind: "Prato principal", photo: true, src: "./uploads/pasted-1787774716724-0.png" },
+    { name: "Alcatra ao molho gorgonzola", kind: "Prato principal", photo: true, src: "./uploads/pasted-1787774739199-0.png" },
+    { name: "Spaghetti di Bologna", kind: "Massa" },
+    { name: "Tortelli 4 queijos", kind: "Massa" },
+    { name: "Arroz Branco", kind: "Guarnição" },
+    { name: "Arroz 7 grãos", kind: "Guarnição" },
+    { name: "Feijão Preto", kind: "Guarnição" },
+    { name: "Creme de milho", kind: "Guarnição" },
+    { name: "Farofa com couve", kind: "Guarnição" },
+    { name: "Torta de pão com frios", kind: "Guarnição" },
+    { name: "Batata rústica", kind: "Guarnição" },
+    { name: "Couve flor empanada", kind: "Guarnição" }
+  ]},
+  { id: "sopas", title: "Sopas", note: "Panela quente durante todo o serviço.", items: [
+    { name: "Mandioquinha cremosa", kind: "Sopa" },
+    { name: "Caldinho de feijão com bacon", kind: "Sopa" }
+  ]},
+  { id: "saladas", title: "Saladas", note: "Buffet de folhas e legumes frescos, montado diariamente.", items: [
+    { name: "Alface crespa", kind: "Folha" },
+    { name: "Rúcula", kind: "Folha" },
+    { name: "Acelga", kind: "Folha" },
+    { name: "Tomate cereja", kind: "Legume" },
+    { name: "Pepino em rodelas", kind: "Legume" },
+    { name: "Cenoura ralada", kind: "Legume" },
+    { name: "Beterraba cozida", kind: "Legume" },
+    { name: "Grão-de-bico", kind: "Grão" },
+    { name: "Milho verde", kind: "Grão" },
+    { name: "Salada de maionese", kind: "Salada pronta" }
+  ]}
+];
+
+const TIMES = ["11:00", "11:30", "12:00", "12:30", "13:00", "13:30"];
+
+const slug = (s) => s.toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g, "-");
+
+class Component extends DCLogic {
+  state = { sheetOpen: false, active: "pratos-do-dia", time: "12:00", people: 2, name: "", obs: "", date: "" };
+
+  componentDidMount() {
+    const d = new Date();
+    this.setState({ date: d.toISOString().slice(0, 10) });
+    this.onScroll = () => {
+      let active = this.state.active;
+      for (const s of MENU) {
+        const el = document.getElementById(s.id);
+        if (el && el.getBoundingClientRect().top <= 160) active = s.id;
+      }
+      if (active !== this.state.active) this.setState({ active });
+    };
+    window.addEventListener("scroll", this.onScroll, { passive: true });
+  }
+  componentWillUnmount() { window.removeEventListener("scroll", this.onScroll); }
+
+  goTo(id) {
+    const el = document.getElementById(id);
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 118, behavior: "smooth" });
+  }
+
+  chip(on) {
+    return "border: 1px solid " + (on ? "#E30613" : "#e6dedc") + "; background: " + (on ? "#E30613" : "#fff") +
+      "; color: " + (on ? "#fff" : "#111") + "; font-size: 14px; font-weight: " + (on ? "600" : "500") +
+      "; padding: 9px 16px; border-radius: 999px; cursor: pointer; white-space: nowrap";
+  }
+
+  renderVals() {
+    const s = this.state;
+    const people = s.people;
+    const dateBR = s.date ? s.date.split("-").reverse().join("/") : "";
+    const msg = "Olá! Gostaria de reservar uma mesa no Restaurante Santtini.\n\n" +
+      "Nome: " + (s.name || "—") + "\nData: " + (dateBR || "—") + "\nHorário: " + s.time +
+      "\nPessoas: " + people + (s.obs ? "\nObservação: " + s.obs : "");
+    const phone = (this.props.whatsapp ?? "5511999999999").replace(/\D/g, "");
+
+    return {
+      sheetOpen: s.sheetOpen,
+      openSheet: () => this.setState({ sheetOpen: true }),
+      closeSheet: () => this.setState({ sheetOpen: false }),
+      stop: (e) => e.stopPropagation(),
+      tabs: MENU.map((m) => ({ label: m.title, style: this.chip(s.active === m.id), go: () => this.goTo(m.id) })),
+      sections: MENU.map((m) => ({
+        id: m.id, title: m.title, note: m.note,
+        items: m.items.map((it) => ({ name: it.name, kind: it.kind, photo: !!it.photo, src: it.src || "", slot: "santtini-" + slug(it.name) }))
+      })),
+      times: TIMES.map((t) => ({ label: t, style: this.chip(s.time === t), pick: () => this.setState({ time: t }) })),
+      name: s.name, obs: s.obs, date: s.date,
+      setName: (e) => this.setState({ name: e.target.value }),
+      setObs: (e) => this.setState({ obs: e.target.value }),
+      setDate: (e) => this.setState({ date: e.target.value }),
+      peopleLabel: people + (people === 1 ? " pessoa" : " pessoas"),
+      less: () => this.setState({ people: Math.max(1, people - 1) }),
+      more: () => this.setState({ people: Math.min(12, people + 1) }),
+      waLink: "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg)
+    };
+  }
+}
+
+</script>
+</body>
+</html>

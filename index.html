@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script src="./image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #ffffff; color: #111111; font-family: Montserrat, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #E30613; text-decoration: none; }
+  a:hover { color: #b0040f; }
+  input, select, button, textarea { font-family: inherit; }
+  @keyframes santCapa {
+    0% { opacity: 0; }
+    5% { opacity: 1; }
+    28% { opacity: 1; }
+    33.3% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+  [data-wrap] { max-width: 560px; }
+  [data-grid] { grid-template-columns: 1fr; }
+  [data-band] { height: 190px; }
+  @media (min-width: 760px) {
+    [data-wrap] { max-width: 920px; }
+    [data-grid] { grid-template-columns: 1fr 1fr; }
+    [data-band] { height: 260px; }
+  }
+  @media (min-width: 1140px) {
+    [data-wrap] { max-width: 1180px; }
+    [data-grid="three"] { grid-template-columns: 1fr 1fr 1fr; }
+    [data-band] { height: 320px; }
+  }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: #ffffff; padding-bottom: 104px">
+
+  <header style="position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #f0eceb">
+    <div data-wrap="" style="margin: 0 auto; padding: 11px 18px; display: flex; align-items: center; gap: 12px">
+      <span style="width: 34px; height: 34px; flex: none; background: #E30613; mask: url('./logo-santtini-icone.svg') center / contain no-repeat; -webkit-mask: url('./logo-santtini-icone.svg') center / contain no-repeat"></span>
+      <div style="display: flex; flex-direction: column; gap: 2px; margin-right: auto; min-width: 0">
+        <span style="font-weight: 400; font-size: 17px; line-height: 1; letter-spacing: 0.01em; color: #E30613">Santtini</span>
+        <span style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8a8180">Panificadora &amp; Confeitaria</span>
+      </div>
+      <span style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #E30613; font-weight: 600; white-space: nowrap">Encomendas</span>
+    </div>
+  </header>
+
+  <section data-wrap="" style="margin: 0 auto; padding: 18px 18px 4px">
+    <div data-band="" style="position: relative; border-radius: 20px; overflow: hidden; background: #faf7f6">
+      <img src="./capa-bolo.png" alt="Bolo de festa Santtini" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
+      <img src="./capa-sanduiche.png" alt="Sanduíche Santtini" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: santCapa 18s linear infinite; animation-delay: 6s" />
+      <img src="./capa-cupcakes.png" alt="Cupcakes Santtini" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: santCapa 18s linear infinite; animation-delay: 12s" />
+      <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 70%; background: linear-gradient(to top, rgba(0,0,0,0.66), rgba(0,0,0,0)); pointer-events: none"></div>
+      <div style="position: absolute; left: 20px; right: 20px; bottom: 18px; pointer-events: none">
+        <h1 style="margin: 0; color: #fff; font-weight: 700; font-size: 27px; line-height: 1.1; letter-spacing: 0.01em; text-transform: uppercase">Cardápio de<br />Encomendas</h1>
+      </div>
+    </div>
+    <p style="margin: 16px 2px 0; font-size: 14.5px; line-height: 1.6; color: #6b6462; max-width: 34em; text-wrap: pretty">Monte seu pedido, ajuste as quantidades e envie a lista pronta pelo WhatsApp. Encomendas com 48h de antecedência.</p>
+  </section>
+
+  <nav style="position: sticky; top: 49px; z-index: 20; background: #ffffff; border-bottom: 1px solid #f0eceb">
+    <div data-wrap="" style="margin: 0 auto; padding: 10px 18px; display: flex; flex-wrap: wrap; gap: 8px">
+      <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="6">
+        <button onClick="{{ tab.go }}" style="{{ tab.style }}">{{ tab.label }}</button>
+      </sc-for>
+    </div>
+  </nav>
+
+  <main data-wrap="" style="margin: 0 auto; padding: 4px 18px 0">
+    <sc-for list="{{ sections }}" as="sec" hint-placeholder-count="4">
+      <section id="{{ sec.id }}" style="scroll-margin-top: 120px; padding: 30px 0 6px">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 6px">
+          <h2 style="margin: 0; color: #E30613; font-weight: 700; font-size: 19px; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.15">{{ sec.title }}</h2>
+          <span style="height: 2px; flex: 1; background: #f0eceb"></span>
+        </div>
+        <p style="margin: 0 0 18px; font-size: 12.5px; color: #8a8180; letter-spacing: 0.01em">{{ sec.note }}</p>
+
+        <div data-grid="{{ sec.cols }}" style="display: grid; gap: 2px 34px">
+          <sc-for list="{{ sec.items }}" as="item" hint-placeholder-count="6">
+            <article style="display: flex; flex-direction: column; gap: 4px; padding: 11px 0; border-bottom: 1px dotted #e6dedc">
+              <div style="display: flex; align-items: center; gap: 10px">
+                <h3 style="margin: 0; font-size: 14.5px; font-weight: 600; line-height: 1.3; color: #111111">{{ item.name }}</h3>
+                <span style="flex: 1; min-width: 12px; height: 1px; border-bottom: 1px dotted #ddd4d2"></span>
+                <span style="font-size: 14px; font-weight: 700; color: #111111; white-space: nowrap">{{ item.priceLabel }}</span>
+                <sc-if value="{{ item.idle }}" hint-placeholder-val="{{ true }}">
+                  <button onClick="{{ item.add }}" aria-label="Adicionar" style="flex: none; width: 34px; height: 34px; border-radius: 999px; border: 1px solid #e6dedc; background: #fff; color: #E30613; font-size: 19px; font-weight: 600; line-height: 1; cursor: pointer" style-hover="border-color: #E30613; background: #faf7f6">+</button>
+                </sc-if>
+                <sc-if value="{{ item.inCart }}" hint-placeholder-val="{{ false }}">
+                  <div style="flex: none; display: flex; align-items: center; gap: 4px; background: #E30613; border-radius: 999px; padding: 3px">
+                    <button onClick="{{ item.less }}" aria-label="Diminuir" style="width: 28px; height: 28px; border: 0; border-radius: 999px; background: rgba(255,255,255,0.16); color: #fff; font-size: 17px; line-height: 1; cursor: pointer">−</button>
+                    <span style="min-width: 52px; text-align: center; font-size: 12.5px; font-weight: 700; color: #fff">{{ item.qtyLabel }}</span>
+                    <button onClick="{{ item.more }}" aria-label="Aumentar" style="width: 28px; height: 28px; border: 0; border-radius: 999px; background: rgba(255,255,255,0.16); color: #fff; font-size: 17px; line-height: 1; cursor: pointer">+</button>
+                  </div>
+                </sc-if>
+              </div>
+              <sc-if value="{{ item.desc }}" hint-placeholder-val="{{ false }}">
+                <p style="margin: 0; font-size: 12px; line-height: 1.5; color: #6b6462; max-width: 46em; text-wrap: pretty">{{ item.desc }}</p>
+              </sc-if>
+            </article>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{ sec.photo }}" hint-placeholder-val="{{ false }}">
+          <div data-band="" style="position: relative; margin: 26px 0 0; border-radius: 18px; overflow: hidden; background: #faf7f6">
+            <image-slot id="{{ sec.photoId }}" shape="rect" placeholder="{{ sec.photoHint }}"></image-slot>
+          </div>
+        </sc-if>
+        <sc-if value="{{ sec.baguettePhoto }}" hint-placeholder-val="{{ false }}">
+          <div data-band="" style="position: relative; margin: 26px 0 0; border-radius: 18px; overflow: hidden; background: #faf7f6">
+            <img src="./foto-baguetes.png" alt="Baguetes montadas na cozinha da Santtini" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
+          </div>
+        </sc-if>
+        <sc-if value="{{ sec.quichePhoto }}" hint-placeholder-val="{{ false }}">
+          <div data-band="" style="position: relative; margin: 26px 0 0; border-radius: 18px; overflow: hidden; background: #faf7f6">
+            <img src="./foto-quiche.png" alt="Quiche de alho poró com bacon" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
+          </div>
+        </sc-if>
+        <sc-if value="{{ sec.savoryPhoto }}" hint-placeholder-val="{{ false }}">
+          <div data-band="" style="position: relative; margin: 26px 0 0; border-radius: 18px; overflow: hidden; background: #faf7f6">
+            <img src="./foto-salgados-mesa.png" alt="Mesa de salgados para coffee break" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
+          </div>
+        </sc-if>
+        <sc-if value="{{ sec.croissantPhoto }}" hint-placeholder-val="{{ false }}">
+          <div data-band="" style="position: relative; margin: 26px 0 0; border-radius: 18px; overflow: hidden; background: #faf7f6">
+            <img src="./foto-croissant-chocolate.png" alt="Croissant com chocolate e castanhas" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
+          </div>
+        </sc-if>
+        <sc-if value="{{ sec.sweetsPhoto }}" hint-placeholder-val="{{ false }}">
+          <div data-band="" style="position: relative; margin: 26px 0 0; border-radius: 18px; overflow: hidden; background: #faf7f6">
+            <img src="./foto-doces-variados.png" alt="Bandeja de doces e tarteletes" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
+          </div>
+        </sc-if>
+        <sc-if value="{{ sec.tartPhoto }}" hint-placeholder-val="{{ false }}">
+          <div data-band="" style="position: relative; margin: 26px 0 0; border-radius: 18px; overflow: hidden; background: #faf7f6">
+            <img src="./foto-torta-morango.png" alt="Torta de chocolate com morangos" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
+          </div>
+        </sc-if>
+        <sc-if value="{{ sec.cakePhoto }}" hint-placeholder-val="{{ false }}">
+          <div data-band="" style="position: relative; margin: 26px 0 0; border-radius: 18px; overflow: hidden; background: #faf7f6">
+            <img src="./foto-bolo-cenoura.png" alt="Fatia de bolo de cenoura com brigadeiro" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
+          </div>
+        </sc-if>
+      </section>
+    </sc-for>
+
+    <section style="margin: 34px 0 0; background: #faf7f6; border: 1px solid #e6dedc; border-radius: 18px; padding: 22px 22px 24px">
+      <h2 style="margin: 0 0 4px; color: #E30613; font-size: 15px; font-weight: 700; letter-spacing: 0.02em">Informações Gerais</h2>
+      <span style="display: block; height: 1px; background: #ddd4d2; margin: 0 0 18px"></span>
+      <div data-grid="" style="display: grid; gap: 18px 40px">
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <span style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #E30613">Atendimento</span>
+          <span style="font-size: 13.5px; line-height: 1.6; color: #3a3535">Seg–Sáb: 07h às 19h<br />Dom e feriados: 07h às 17h</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <span style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #E30613">Pedido mínimo</span>
+          <span style="font-size: 13.5px; line-height: 1.6; color: #3a3535">25 unidades/sabor (itens unitários)<br />1 kg mínimo (itens por kg)</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <span style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #E30613">Prazo</span>
+          <span style="font-size: 13.5px; line-height: 1.6; color: #3a3535">Encomendas com 48h de antecedência</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <span style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #E30613">Entrega</span>
+          <span style="font-size: 13.5px; line-height: 1.6; color: #3a3535">Consultar taxa por bairro</span>
+        </div>
+      </div>
+      <p style="margin: 20px 0 0; font-size: 12px; font-style: italic; color: #8a8180">Cardápio sujeito a alterações sem aviso prévio.</p>
+    </section>
+
+    <footer style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 46px 0 20px; text-align: center">
+      <img src="./logo-santtini-completa.svg" alt="Santtini Panificadora &amp; Confeitaria" style="width: 100%; max-width: 260px; height: auto" />
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #8a8180">Confeitaria</span>
+        <span style="font-size: 13.5px; color: #3a3535">(41) 3014-8665 &nbsp;·&nbsp; {{ phoneLabel }} (WhatsApp)</span>
+        <a href="https://instagram.com/panificadorasanttini" target="_blank" rel="noopener" style="font-size: 13.5px; font-weight: 700">@panificadorasanttini</a>
+        <span style="font-size: 12.5px; color: #8a8180">Rua Brasílio Itiberê, 3538 &nbsp;|&nbsp; Água Verde &nbsp;|&nbsp; Curitiba-PR</span>
+      </div>
+    </footer>
+  </main>
+
+  <div style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-top: 1px solid #f0eceb">
+    <div data-wrap="" style="margin: 0 auto; padding: 12px 18px; display: flex; align-items: center; gap: 14px">
+      <div style="display: flex; flex-direction: column; margin-right: auto; min-width: 0">
+        <span style="font-size: 14.5px; font-weight: 700; color: #111111">{{ cartTitle }}</span>
+        <span style="font-size: 12.5px; color: #8a8180">{{ cartSub }}</span>
+      </div>
+      <button onClick="{{ openCart }}" style="border: 0; background: #E30613; color: #fff; font-size: 14.5px; font-weight: 700; padding: 14px 22px; border-radius: 999px; cursor: pointer; white-space: nowrap" style-hover="background: #b0040f">{{ cartCta }}</button>
+    </div>
+  </div>
+
+  <sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeCart }}" style="position: fixed; inset: 0; z-index: 50; background: rgba(17,17,17,0.44); display: flex; align-items: flex-end; justify-content: center">
+      <div onClick="{{ stop }}" style="width: 100%; max-width: 560px; background: #ffffff; border-radius: 22px 22px 0 0; padding: 22px 20px 26px; max-height: 92vh; overflow-y: auto">
+        <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px">
+          <div style="margin-right: auto">
+            <h2 style="margin: 0; font-weight: 700; font-size: 21px; color: #E30613">Seu pedido</h2>
+            <p style="margin: 4px 0 0; font-size: 12.5px; color: #8a8180">{{ cartSub }}</p>
+          </div>
+          <button onClick="{{ closeCart }}" aria-label="Fechar" style="border: 1px solid #e6dedc; background: #fff; width: 36px; height: 36px; border-radius: 999px; font-size: 18px; line-height: 1; cursor: pointer; color: #8a8180">×</button>
+        </div>
+
+        <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 0 0 22px; padding: 26px 18px; background: #faf7f6; border-radius: 14px; font-size: 13.5px; line-height: 1.6; color: #6b6462; text-align: center">Nenhum item selecionado ainda. Toque no <strong style="color: #E30613">+</strong> ao lado de cada sabor para montar sua encomenda.</p>
+        </sc-if>
+
+        <div style="display: flex; flex-direction: column; gap: 2px; margin-bottom: 22px">
+          <sc-for list="{{ cartLines }}" as="line" hint-placeholder-count="0">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px dotted #e6dedc">
+              <div style="display: flex; flex-direction: column; gap: 3px; margin-right: auto; min-width: 0">
+                <span style="font-size: 14px; font-weight: 600; color: #111111">{{ line.name }}</span>
+                <span style="font-size: 12px; color: #8a8180">{{ line.detail }}</span>
+              </div>
+              <div style="flex: none; display: flex; align-items: center; gap: 4px; border: 1px solid #e6dedc; border-radius: 999px; padding: 3px; background: #fff">
+                <button onClick="{{ line.less }}" aria-label="Diminuir" style="width: 30px; height: 30px; border: 0; border-radius: 999px; background: #faf7f6; color: #E30613; font-size: 17px; line-height: 1; cursor: pointer">−</button>
+                <span style="min-width: 52px; text-align: center; font-size: 12.5px; font-weight: 700; color: #111111">{{ line.qtyLabel }}</span>
+                <button onClick="{{ line.more }}" aria-label="Aumentar" style="width: 30px; height: 30px; border: 0; border-radius: 999px; background: #faf7f6; color: #E30613; font-size: 17px; line-height: 1; cursor: pointer">+</button>
+              </div>
+              <span style="flex: none; min-width: 76px; text-align: right; font-size: 13.5px; font-weight: 700; color: #E30613">{{ line.total }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 18px">
+          <label style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8180; font-weight: 600">Nome</span>
+            <input value="{{ name }}" onChange="{{ setName }}" placeholder="Seu nome" style="border: 1px solid #e6dedc; border-radius: 12px; padding: 13px 14px; font-size: 16px; color: #111111; background: #fff; outline: none" style-focus="border-color: #E30613" />
+          </label>
+
+          <label style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8180; font-weight: 600">Data de retirada / entrega</span>
+            <input type="date" value="{{ date }}" onChange="{{ setDate }}" style="border: 1px solid #e6dedc; border-radius: 12px; padding: 13px 14px; font-size: 16px; color: #111111; background: #fff; outline: none" style-focus="border-color: #E30613" />
+            <span style="font-size: 12px; color: #8a8180">{{ dateWarning }}</span>
+          </label>
+
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8180; font-weight: 600">Como receber</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <sc-for list="{{ modes }}" as="m" hint-placeholder-count="2">
+                <button onClick="{{ m.pick }}" style="{{ m.style }}">{{ m.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+
+          <label style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8180; font-weight: 600">Observação <span style="text-transform: none; letter-spacing: 0; color: #b3aaa8">(opcional)</span></span>
+            <textarea value="{{ obs }}" onChange="{{ setObs }}" rows="2" placeholder="Escrita no bolo, bairro para entrega, restrição alimentar…" style="border: 1px solid #e6dedc; border-radius: 12px; padding: 13px 14px; font-size: 16px; color: #111111; background: #fff; outline: none; resize: none" style-focus="border-color: #E30613"></textarea>
+          </label>
+
+          <div style="display: flex; align-items: baseline; gap: 12px; padding: 16px 0 0; border-top: 1px solid #e6dedc">
+            <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8180; font-weight: 600; margin-right: auto">Total estimado</span>
+            <span style="font-size: 22px; font-weight: 700; color: #E30613">{{ totalLabel }}</span>
+          </div>
+
+          <a href="{{ waLink }}" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: #E30613; color: #fff; font-size: 16px; font-weight: 700; padding: 16px; border-radius: 14px" style-hover="background: #b0040f; color: #fff">Enviar pedido pelo WhatsApp</a>
+          <p style="margin: -6px 0 0; font-size: 12px; line-height: 1.6; color: #b3aaa8; text-align: center">Valor estimado. A confirmação, o peso final e a taxa de entrega são combinados no atendimento.</p>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5541997146521&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contato&quot;},&quot;showDescriptions&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Cardápio&quot;}}">
+const KG = { unit: "kg", step: 0.5, min: 1, suffix: "/kg" };
+const UN = { unit: "un", step: 25, min: 25, suffix: "/un" };
+const EA = { unit: "un", step: 1, min: 1, suffix: "" };
+
+const MENU = [
+  { id: "bolos-de-festa", title: "Bolos de Festa", note: "Pedido mínimo: 1 kg por sabor · encomendas com 48h de antecedência", cols: "two", m: KG,
+    cakePhoto: true, items: [
+    { n: "Morango com Suspiro", p: 87.90, d: "Massa: pão de ló branco / Recheio: creme chiffon, morango e suspiro / Cobertura: chantilly, suspiro e morango" },
+    { n: "Morango com Nata", p: 89.90, d: "Massa: pão de ló branco / Recheio: nata e morango / Cobertura: nata, morango e suspiro" },
+    { n: "Chorango", p: 87.90, d: "Massa: pão de ló de chocolate / Recheio: brigadeiro mole e morango / Cobertura: chantilly, ganache e morango" },
+    { n: "Dois Amores", p: 85.90, d: "Massa: pão de ló branco e de chocolate / Recheio: brigadeiro branco e brigadeiro de chocolate / Cobertura: ganache de chocolate e docinhos dois amores" },
+    { n: "Brigadeiro", p: 85.90, d: "Massa: pão de ló de chocolate / Recheio: brigadeiro mole / Cobertura: ganache e docinho brigadeiro" },
+    { n: "Prestígio", p: 82.90, d: "Massa: pão de ló de chocolate / Recheio: creme de coco / Cobertura: ganache de chocolate e bombom de prestígio" },
+    { n: "Sonho de Valsa", p: 85.90, d: "Massa: pão de ló de chocolate / Recheio: creme chiffon e bombom sonho de Valsa / Cobertura: chantilly, ganache preto e sonho de Valsa" },
+    { n: "Ouro Branco", p: 85.90, d: "Massa: pão de ló branco / Recheio: creme chiffon e ouro branco / Cobertura: chantilly, ganache branco e ouro branco" },
+    { n: "Kit Kat", p: 98.00, d: "Massa: pão de ló de chocolate / Recheio: mousse de chocolate e kit kat / Cobertura: ganache de chocolate, chantilly e kit kat" },
+    { n: "Ferreiro Rocher", p: 98.00, d: "Massa: pão de ló de chocolate / Recheio: creme de avelã / Cobertura: chantilly, ganache e Ferreiro Rocher" },
+    { n: "Strogonoff de Nozes", p: 98.00, d: "Massa: pão de ló branco / Recheio: strogonoff de nozes / Cobertura: chantilly, ganache branco e nozes picadas" },
+    { n: "Marta Rocha", p: 87.90, d: "Massa: pão de ló branco e preto / Recheio: baba de moça, strogonoff de nozes, creme de damasco e doce de ameixa / Cobertura: chantilly, crocante, fios de ovos e nozes" },
+    { n: "Abacaxi com Coco", p: 85.90, d: "Massa: pão de ló branco / Recheio: creme chiffon e abacaxi / Cobertura: chantilly e coco fresco" },
+    { n: "Tropical de Frutas", p: 89.90, d: "Massa: pão de ló branco / Recheio: creme chiffon, abacaxi, pêssego e morango / Cobertura: chantilly, ganache branco e frutas" }
+  ]},
+  { id: "bolos-secos-recheados", title: "Bolos Secos Recheados", note: "Pedido mínimo: 1 kg por sabor", cols: "three", m: KG, items: [
+    { n: "Cenoura com Brigadeiro", p: 62.90 }, { n: "Cenoura Americano", p: 69.90 },
+    { n: "Brownie", p: 79.90 }, { n: "Indiano", p: 65.90 },
+    { n: "Bem Casado", p: 62.90 }, { n: "Toalha Felpuda", p: 62.90 }, { n: "Red Velvet", p: 79.90 }
+  ]},
+  { id: "bolos-secos", title: "Bolos Secos", note: "Pedido mínimo: 1 kg por sabor", cols: "three", m: KG,
+    tartPhoto: true, items: [
+    { n: "Cenoura c/ cobertura de chocolate", p: 57.90 }, { n: "Laranja", p: 55.90 },
+    { n: "Fubá", p: 49.90 }, { n: "Fubá com Goiaba", p: 55.90 },
+    { n: "Aipim", p: 59.90 }, { n: "Aipim com Coco", p: 59.90 },
+    { n: "Formigueiro", p: 55.90 }, { n: "Mármore", p: 55.90 },
+    { n: "Chocolate com Brigadeiro", p: 55.90 }, { n: "Coco", p: 55.90 }, { n: "Iogurte Natural", p: 55.90 }
+  ]},
+  { id: "tortas", title: "Tortas", note: "Pedido mínimo: 1 kg por sabor", cols: "two", m: KG, items: [
+    { n: "Alemã", p: 80.90, d: "Bolacha de maisena, nata batida e ganache de chocolate" },
+    { n: "Holandesa", p: 80.90, d: "Bolacha de chocolate, creme de cacau com amarula e ganache de chocolate" },
+    { n: "Cheescake Tradicional", p: 85.90, d: "Base: bolacha triturada, creme de cream cheese e geleia de frutas vermelhas" },
+    { n: "Brownie", p: 79.90 }, { n: "Torta de Ricota", p: 55.90 }, { n: "Torta Negresco", p: 79.90 },
+    { n: "Torta de Limão", p: 69.90 }, { n: "Torta de Morango", p: 79.90 }, { n: "Pudim de Leite Condensado", p: 69.90 }
+  ]},
+  { id: "sobremesas", title: "Sobremesas", note: "Pedido mínimo: 1 kg por sabor", cols: "three", m: KG,
+    sweetsPhoto: true, items: [
+    { n: "Profiterolis", p: 89.90 }, { n: "Tiramissu", p: 99.90 }, { n: "Banoffee", p: 85.00 }
+  ]},
+  { id: "docinhos", title: "Docinhos de Festa", note: "Docinhos tradicionais · pedido mínimo: 25 unidades por sabor", cols: "two", m: UN,
+    croissantPhoto: true, items: [
+    { n: "Brigadeiro Preto", p: 1.95 }, { n: "Brigadeiro Branco", p: 1.95 }, { n: "Dois Amores", p: 1.95 },
+    { n: "Beijinho", p: 1.95 }, { n: "Olho de Sogra", p: 1.95 }, { n: "Cajuzinho", p: 1.95 },
+    { n: "Docinho de Abacaxi com Brig. Branco", p: 1.95 },
+    { n: "Moranguinho", p: 1.95, d: "Brigadeiro branco e açúcar vermelho em formato de morango" },
+    { n: "Ninho com Nutella", p: 2.50 }, { n: "Tradicional com Flocos ou M&M", p: 2.50 },
+    { n: "Surpresinha de Uva", p: 2.95 }, { n: "Bombom de Morango", p: 2.95 }, { n: "Bombom de Uva", p: 2.95 },
+    { n: "Trufa Chocolate Preto", p: 3.50 }, { n: "Trufa Chocolate Branco", p: 3.50 }, { n: "Trufa de Avelã", p: 3.50 },
+    { n: "Trufa de Maracujá", p: 3.50 }, { n: "Trufa de Limão", p: 3.50 }, { n: "Trufa de Nozes", p: 3.50 },
+    { n: "Camafeu de Nozes", p: 3.50 }, { n: "Mini Tartelete de Morango", p: 3.50 }, { n: "Mini Tartelete de Limão", p: 3.50 },
+    { n: "Mini Pudim", p: 3.50 }, { n: "Mini Quindim", p: 3.50 }, { n: "Mini Carolina de Brigadeiro", p: 2.95 },
+    { n: "Mini Carolina Creme Chiffon", p: 2.95 }, { n: "Mini Carolina Doce de Leite", p: 2.95 }, { n: "Mini Carolina de Limão", p: 2.95 }
+  ]},
+  { id: "outros-doces", title: "Outros Doces", note: "Pedido mínimo: 25 unidades por sabor (itens unitários)", cols: "two", m: UN, items: [
+    { n: "Mini Croissant de Chocolate", p: 3.20 }, { n: "Mini Folhado Romeu e Julieta", p: 3.20 },
+    { n: "Mini Sonho Frito de Goiaba", p: 2.50 }, { n: "Mini Sonho Assado Doce de Leite", p: 3.50 },
+    { n: "Mini Sonho Assado de Goiaba", p: 3.50 }, { n: "Lua de Mel Creme Chiffon", p: 3.20 },
+    { n: "Mini Cupcake de Chocolate", p: 4.50 }, { n: "Mini Cupcake de Cenoura", p: 4.50 },
+    { n: "Mini Cupcake de Baunilha", p: 4.50 },
+    { n: "Petit Four Doce Diversos", p: 89.90, m: KG }, { n: "Petit Four Salgado Diversos", p: 89.90, m: KG }
+  ]},
+  { id: "mini-salgados-fritos", title: "Mini Salgados Fritos", note: "Pedido mínimo: 25 unidades por sabor", cols: "two", m: UN,
+    savoryPhoto: true, items: [
+    { n: "Coxinha de Frango", p: 1.85 }, { n: "Risoles de Carne", p: 1.85 },
+    { n: "Risoles de Presunto e Queijo", p: 1.85 }, { n: "Bolinha de Queijo", p: 1.85 },
+    { n: "Pastelzinho de Carne", p: 1.95 }, { n: "Pastelzinho de Queijo", p: 1.95 },
+    { n: "Mini Coxinha Frango c/ Requeijão", p: 2.50 }
+  ]},
+  { id: "salgados-assados", title: "Salgados Assados", note: "Pedido mínimo: 25 unidades por sabor", cols: "two", m: UN,
+    quichePhoto: true, items: [
+    { n: "Mini Sfiha de Carne", p: 2.50 }, { n: "Mini Sfiha de Frango", p: 2.50 }, { n: "Mini Doguinho", p: 2.50 },
+    { n: "Mini Pão de Batata Frango c/ Requeijão", p: 2.50 }, { n: "Mini Pão de Batata Requeijão Cremoso", p: 2.50 },
+    { n: "Mini Pão de Batata Calabresa", p: 2.50 }, { n: "Mini Bauru Presunto e Queijo", p: 2.50 },
+    { n: "Mini Bauru Lombinho c/ Cream Cheese", p: 2.75 }, { n: "Mini Folhado Presunto e Queijo", p: 2.50 },
+    { n: "Mini Folhado de Palmito", p: 2.50 }, { n: "Mini Folhado Peito de Peru c/ Queijo", p: 2.50 },
+    { n: "Mini Folhado Milho c/ Cream Cheese", p: 2.75 }, { n: "Mini Folhado Tomate Seco c/ Ricota", p: 2.75 },
+    { n: "Mini Folhado de Frango", p: 2.50 }, { n: "Mini Croissant Presunto e Queijo", p: 2.50 },
+    { n: "Mini Croissant de Queijo", p: 2.50 }, { n: "Mini Croissant Peito Peru c/ Queijo", p: 2.50 },
+    { n: "Mini Quiche Alho Poró com Bacon", p: 2.50 }, { n: "Mini Quiche Quatro Queijos", p: 2.50 },
+    { n: "Mini Quiche Tomate Seco c/ Rúcula", p: 2.50 }, { n: "Mini Empada de Frango", p: 2.50 },
+    { n: "Mini Empada de Palmito", p: 2.50 }, { n: "Mini Pastel Assado Carne c/ Azeitona", p: 2.95 },
+    { n: "Mini Pastel Assado Frango c/ Requeijão", p: 2.95 }, { n: "Mini Pizza Bacon com Milho", p: 3.50 },
+    { n: "Mini Pizza Calabresa", p: 3.50 }, { n: "Mini Pizza Frango com Catupiry", p: 3.50 },
+    { n: "Sfiha Aberta de Carne", p: 5.50 }, { n: "Sfiha Aberta de Queijo", p: 5.50 },
+    { n: "Mini Pão de Queijo", p: 2.20 }, { n: "Mini Palitinho de Queijo", p: 2.20 }, { n: "Mini Chipa", p: 2.20 }
+  ]},
+  { id: "tortas-frias", title: "Tortas Frias, Empadões e Quiches", note: "Pedido mínimo: 1 kg por sabor", cols: "two", m: KG, items: [
+    { n: "Empadão de Frango com Requeijão", p: 82.90 }, { n: "Empadão de Palmito", p: 82.90 },
+    { n: "Quiche Alho Poró com Bacon", p: 82.90 }, { n: "Quiche Quatro Queijos", p: 82.90 },
+    { n: "Torta de Legumes", p: 62.90 }, { n: "Torta de Frango com Grão de Bico", p: 69.90 },
+    { n: "Torta Fria de Frango", p: 65.90 }
+  ]},
+  { id: "mini-sanduiches", title: "Mini Sanduíches", note: "Opções de pães: brioche, francês e integral · pedido mínimo: 25 unidades por sabor", cols: "two", m: UN,
+    baguettePhoto: true, items: [
+    { n: "Salame Italiano", p: 4.50, d: "Salame italiano, queijo, alface e tomate" },
+    { n: "Presunto e Queijo", p: 3.95, d: "Presunto e queijo, alface e tomate" },
+    { n: "Peito de Peru", p: 3.95, d: "Peito de peru com queijo, alface e tomate" },
+    { n: "Salpicão de Frango", p: 3.95, d: "Salpicão de frango, alface e tomate" }
+  ]},
+  { id: "sanduiche-60", title: "Sanduíche 60 cm", note: "Serve em média 5 pessoas", cols: "two", m: EA, items: [
+    { n: "Italiano", p: 120.00, d: "Salame italiano, queijo mussarela, alface, tomate, maionese — na baguete com parmesão" },
+    { n: "Presunto e Queijo", p: 110.00, d: "Presunto e queijo, maionese, alface e tomate — na baguete tradicional" },
+    { n: "Peito de Peru", p: 115.00, d: "Peito de peru, queijo, alface, tomate, maionese — na baguete tradicional com gergelim" },
+    { n: "Vegetariano", p: 120.00, d: "Pastinha de tomate seco com ricota, alface, rúcula, cenoura ralada, palmito — na baguete integral com gergelim" }
+  ]}
+];
+
+const brl = (v) => "R$ " + v.toFixed(2).replace(".", ",");
+const qtyText = (q, unit) => {
+  const s = Number.isInteger(q) ? String(q) : q.toFixed(1).replace(".", ",");
+  return s + " " + unit;
+};
+
+class Component extends DCLogic {
+  state = { cartOpen: false, active: MENU[0].id, qty: {}, name: "", obs: "", date: "", mode: "Retirar na loja" };
+
+  componentDidMount() {
+    const d = new Date(Date.now() + 3 * 86400000);
+    this.setState({ date: d.toISOString().slice(0, 10) });
+    this.onScroll = () => {
+      let active = this.state.active;
+      for (const s of MENU) {
+        const el = document.getElementById(s.id);
+        if (el && el.getBoundingClientRect().top <= 170) active = s.id;
+      }
+      if (active !== this.state.active) this.setState({ active });
+    };
+    window.addEventListener("scroll", this.onScroll, { passive: true });
+  }
+  componentWillUnmount() { window.removeEventListener("scroll", this.onScroll); }
+
+  goTo(id) {
+    const el = document.getElementById(id);
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 118, behavior: "smooth" });
+  }
+
+  bump(key, m, dir) {
+    this.setState((s) => {
+      const cur = s.qty[key] || 0;
+      let next = cur === 0 && dir > 0 ? m.min : Math.round((cur + dir * m.step) * 10) / 10;
+      if (next < m.min) next = 0;
+      const qty = Object.assign({}, s.qty);
+      if (next <= 0) delete qty[key]; else qty[key] = next;
+      return { qty };
+    });
+  }
+
+  chip(on) {
+    return "border: 1px solid " + (on ? "#E30613" : "#e6dedc") + "; background: " + (on ? "#E30613" : "#fff") +
+      "; color: " + (on ? "#fff" : "#3a3535") + "; font-size: 13px; font-weight: " + (on ? "700" : "500") +
+      "; padding: 9px 15px; border-radius: 999px; cursor: pointer; white-space: nowrap";
+  }
+
+  renderVals() {
+    const s = this.state;
+    const phone = (this.props.whatsapp ?? "5541997146521").replace(/\D/g, "");
+    const showDesc = this.props.showDescriptions ?? true;
+    const lines = [];
+    let total = 0;
+
+    const sections = MENU.map((sec) => ({
+      id: sec.id, title: sec.title, note: sec.note, cols: sec.cols,
+      photo: !!sec.photoId, photoId: sec.photoId || "", photoHint: sec.photoHint || "", cakePhoto: !!sec.cakePhoto, tartPhoto: !!sec.tartPhoto, sweetsPhoto: !!sec.sweetsPhoto, croissantPhoto: !!sec.croissantPhoto, savoryPhoto: !!sec.savoryPhoto, quichePhoto: !!sec.quichePhoto, baguettePhoto: !!sec.baguettePhoto,
+      items: sec.items.map((it) => {
+        const m = it.m || sec.m;
+        const key = sec.id + "::" + it.n;
+        const q = s.qty[key] || 0;
+        if (q > 0) {
+          const lt = q * it.p;
+          total += lt;
+          lines.push({
+            name: it.n, detail: sec.title + " · " + brl(it.p) + m.suffix, qtyLabel: qtyText(q, m.unit), total: brl(lt),
+            less: () => this.bump(key, m, -1), more: () => this.bump(key, m, 1),
+            msg: it.n + " — " + qtyText(q, m.unit) + " — " + brl(lt)
+          });
+        }
+        return {
+          name: it.n, desc: showDesc ? (it.d || "") : "",
+          priceLabel: brl(it.p) + m.suffix,
+          idle: q === 0, inCart: q > 0, qtyLabel: qtyText(q, m.unit),
+          add: () => this.bump(key, m, 1), less: () => this.bump(key, m, -1), more: () => this.bump(key, m, 1)
+        };
+      })
+    }));
+
+    const count = lines.length;
+    const dateBR = s.date ? s.date.split("-").reverse().join("/") : "";
+    const soon = s.date ? (new Date(s.date + "T12:00:00") - Date.now()) < 48 * 3600000 : false;
+    const msg = "Olá! Gostaria de fazer uma encomenda na Santtini.\n\n" +
+      (count ? lines.map((l) => "• " + l.msg).join("\n") + "\n\nTotal estimado: " + brl(total) + "\n\n" : "") +
+      "Nome: " + (s.name || "—") + "\nData: " + (dateBR || "—") + "\n" + s.mode + (s.obs ? "\nObservação: " + s.obs : "");
+
+    return {
+      sections,
+      tabs: MENU.map((m) => ({ label: m.title, style: this.chip(s.active === m.id), go: () => this.goTo(m.id) })),
+      cartOpen: s.cartOpen, empty: count === 0,
+      openCart: () => this.setState({ cartOpen: true }),
+      closeCart: () => this.setState({ cartOpen: false }),
+      stop: (e) => e.stopPropagation(),
+      cartLines: lines,
+      cartTitle: count ? brl(total) : "Encomendas Santtini",
+      cartSub: count ? count + (count === 1 ? " item selecionado" : " itens selecionados") : "Selecione os itens e envie pelo WhatsApp",
+      cartCta: count ? "Ver pedido" : "Falar no WhatsApp",
+      totalLabel: brl(total),
+      phoneLabel: "(41) 9 9714-6521",
+      name: s.name, obs: s.obs, date: s.date,
+      dateWarning: soon ? "Atenção: encomendas pedem 48h de antecedência." : "Encomendas com 48h de antecedência.",
+      modes: ["Retirar na loja", "Entrega (taxa por bairro)"].map((l) => ({
+        label: l, style: this.chip(s.mode === l), pick: () => this.setState({ mode: l })
+      })),
+      setName: (e) => this.setState({ name: e.target.value }),
+      setObs: (e) => this.setState({ obs: e.target.value }),
+      setDate: (e) => this.setState({ date: e.target.value }),
+      waLink: "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg)
+    };
+  }
+}
+
+</script>
+</body>
+</html>
