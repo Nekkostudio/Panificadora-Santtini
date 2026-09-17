@@ -47,10 +47,12 @@
 
   <header style="position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #f0eceb">
     <div data-wrap="" style="margin: 0 auto; padding: 11px 18px; display: flex; align-items: center; gap: 12px">
-      <span style="width: 34px; height: 34px; flex: none; background: #E30613; mask: url('./logo-santtini-icone.svg') center / contain no-repeat; -webkit-mask: url('./logo-santtini-icone.svg') center / contain no-repeat"></span>
+      <svg viewBox="0 0 1080 1080" role="img" aria-label="Santtini" style="width: 34px; height: 34px; flex: none; display: block">
+        <path fill="#E30613" d="M352.27,476.52c79.04-23.96,161.57-8.28,223.38,40.61c62.56,49.49,71.58,138.66,19.33,183.9c-43.67,37.81-104.27,27.39-104.54,8.98c-0.25-17.26,58.87-12.18,66.1-73.76c7.06-60.23-32.57-113.72-93.37-129.65c-70.15-18.38-145.71,9.95-189.76,71.28c-81.88,114-56.33,274.05,49.95,365.31c121.37,104.22,301,109.39,427.21,11.24c49.28-38.33,82.55-89.33,96.48-149.01c18.47-79.14-8.32-154.95-68.59-208.81c-36.94-33.01-79.08-57.1-123.28-80.74l-115.62-61.85c-39.76-21.27-74.77-48.17-103.84-82.68c-57.07-67.76-63.63-166.63-9.38-237.47c62.77-81.96,190.07-116.59,284.27-61.99l1.42-52.2c4.44-4.81,21.11-6.01,27.42-3.14l0.13,365.77l-29.76,0.05l-0.81-166.46c-0.35-72.67-34.91-134.43-109.59-133.5c-51.14,0.64-101.34,24.01-129.36,67.68c-35.28,54.99-25.01,124.94,19.69,171.9c29.37,30.85,63.23,55.68,101.05,76.19l135.55,73.52c40.09,21.74,75.99,46.32,109.58,77.02c84.45,77.17,109.1,194.72,64.24,300.9c-34.47,81.58-99.54,141.69-180.97,178.03c-73.35,32.74-152.33,41.26-232.74,33.82c-171.66-15.88-318.56-123.63-328.27-303.63C151.3,629.88,226.61,514.6,352.27,476.52z"></path>
+      </svg>
       <div style="display: flex; flex-direction: column; gap: 2px; margin-right: auto; min-width: 0">
         <span style="font-weight: 400; font-size: 17px; line-height: 1; letter-spacing: 0.01em; color: #E30613">Santtini</span>
-        <span style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8a8180">Panificadora &amp; Confeitaria</span>
+        <span style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #6b6462">Panificadora &amp; Confeitaria</span>
       </div>
       <span style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #E30613; font-weight: 600; white-space: nowrap">Encomendas</span>
     </div>
@@ -63,28 +65,29 @@
       <img src="./capa-cupcakes.png" alt="Cupcakes Santtini" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: santCapa 18s linear infinite; animation-delay: 12s" />
       <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 70%; background: linear-gradient(to top, rgba(0,0,0,0.66), rgba(0,0,0,0)); pointer-events: none"></div>
       <div style="position: absolute; left: 20px; right: 20px; bottom: 18px; pointer-events: none">
-        <h1 style="margin: 0; color: #fff; font-weight: 700; font-size: 27px; line-height: 1.1; letter-spacing: 0.01em; text-transform: uppercase">Cardápio de<br />Encomendas</h1>
+        <h1 style="margin: 0; color: #fff; font-weight: 700; font-size: 21px; line-height: 1.15; letter-spacing: 0.01em; text-transform: uppercase">Cardápio de<br />Encomendas</h1>
       </div>
     </div>
     <p style="margin: 16px 2px 0; font-size: 14.5px; line-height: 1.6; color: #6b6462; max-width: 34em; text-wrap: pretty">Monte seu pedido, ajuste as quantidades e envie a lista pronta pelo WhatsApp. Encomendas com 48h de antecedência.</p>
   </section>
 
-  <nav style="position: sticky; top: 49px; z-index: 20; background: #ffffff; border-bottom: 1px solid #f0eceb">
-    <div data-wrap="" style="margin: 0 auto; padding: 10px 18px; display: flex; flex-wrap: wrap; gap: 8px">
+  <nav style="position: sticky; top: 57px; z-index: 20; background: #ffffff; border-bottom: 1px solid #f0eceb">
+    <div data-wrap="" style="margin: 0 auto; padding: 10px 18px 10px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; mask-image: linear-gradient(to right, #000 calc(100% - 30px), transparent); -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 30px), transparent)">
       <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="6">
         <button onClick="{{ tab.go }}" style="{{ tab.style }}">{{ tab.label }}</button>
       </sc-for>
+      <span style="flex: none; width: 6px"></span>
     </div>
   </nav>
 
   <main data-wrap="" style="margin: 0 auto; padding: 4px 18px 0">
     <sc-for list="{{ sections }}" as="sec" hint-placeholder-count="4">
-      <section id="{{ sec.id }}" style="scroll-margin-top: 120px; padding: 30px 0 6px">
+      <section id="{{ sec.id }}" style="scroll-margin-top: 126px; padding: 30px 0 6px">
         <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 6px">
           <h2 style="margin: 0; color: #E30613; font-weight: 700; font-size: 19px; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.15">{{ sec.title }}</h2>
           <span style="height: 2px; flex: 1; background: #f0eceb"></span>
         </div>
-        <p style="margin: 0 0 18px; font-size: 12.5px; color: #8a8180; letter-spacing: 0.01em">{{ sec.note }}</p>
+        <p style="margin: 0 0 18px; font-size: 12.5px; color: #6b6462; letter-spacing: 0.01em">{{ sec.note }}</p>
 
         <div data-grid="{{ sec.cols }}" style="display: grid; gap: 2px 34px">
           <sc-for list="{{ sec.items }}" as="item" hint-placeholder-count="6">
@@ -175,16 +178,16 @@
           <span style="font-size: 13.5px; line-height: 1.6; color: #3a3535">Consultar taxa por bairro</span>
         </div>
       </div>
-      <p style="margin: 20px 0 0; font-size: 12px; font-style: italic; color: #8a8180">Cardápio sujeito a alterações sem aviso prévio.</p>
+      <p style="margin: 20px 0 0; font-size: 12px; font-style: italic; color: #6b6462">Cardápio sujeito a alterações sem aviso prévio.</p>
     </section>
 
     <footer style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 46px 0 20px; text-align: center">
       <img src="./logo-santtini-completa.svg" alt="Santtini Panificadora &amp; Confeitaria" style="width: 100%; max-width: 260px; height: auto" />
       <div style="display: flex; flex-direction: column; gap: 8px">
-        <span style="font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #8a8180">Confeitaria</span>
+        <span style="font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #6b6462">Confeitaria</span>
         <span style="font-size: 13.5px; color: #3a3535">(41) 3014-8665 &nbsp;·&nbsp; {{ phoneLabel }} (WhatsApp)</span>
         <a href="https://instagram.com/panificadorasanttini" target="_blank" rel="noopener" style="font-size: 13.5px; font-weight: 700">@panificadorasanttini</a>
-        <span style="font-size: 12.5px; color: #8a8180">Rua Brasílio Itiberê, 3538 &nbsp;|&nbsp; Água Verde &nbsp;|&nbsp; Curitiba-PR</span>
+        <span style="font-size: 12.5px; color: #6b6462">Rua Brasílio Itiberê, 3538 &nbsp;|&nbsp; Água Verde &nbsp;|&nbsp; Curitiba-PR</span>
       </div>
     </footer>
   </main>
@@ -193,7 +196,7 @@
     <div data-wrap="" style="margin: 0 auto; padding: 12px 18px; display: flex; align-items: center; gap: 14px">
       <div style="display: flex; flex-direction: column; margin-right: auto; min-width: 0">
         <span style="font-size: 14.5px; font-weight: 700; color: #111111">{{ cartTitle }}</span>
-        <span style="font-size: 12.5px; color: #8a8180">{{ cartSub }}</span>
+        <span style="font-size: 12.5px; color: #6b6462">{{ cartSub }}</span>
       </div>
       <button onClick="{{ openCart }}" style="border: 0; background: #E30613; color: #fff; font-size: 14.5px; font-weight: 700; padding: 14px 22px; border-radius: 999px; cursor: pointer; white-space: nowrap" style-hover="background: #b0040f">{{ cartCta }}</button>
     </div>
@@ -205,9 +208,9 @@
         <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px">
           <div style="margin-right: auto">
             <h2 style="margin: 0; font-weight: 700; font-size: 21px; color: #E30613">Seu pedido</h2>
-            <p style="margin: 4px 0 0; font-size: 12.5px; color: #8a8180">{{ cartSub }}</p>
+            <p style="margin: 4px 0 0; font-size: 12.5px; color: #6b6462">{{ cartSub }}</p>
           </div>
-          <button onClick="{{ closeCart }}" aria-label="Fechar" style="border: 1px solid #e6dedc; background: #fff; width: 36px; height: 36px; border-radius: 999px; font-size: 18px; line-height: 1; cursor: pointer; color: #8a8180">×</button>
+          <button onClick="{{ closeCart }}" aria-label="Fechar" style="border: 1px solid #e6dedc; background: #fff; width: 36px; height: 36px; border-radius: 999px; font-size: 18px; line-height: 1; cursor: pointer; color: #6b6462">×</button>
         </div>
 
         <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
@@ -219,7 +222,7 @@
             <div style="display: flex; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px dotted #e6dedc">
               <div style="display: flex; flex-direction: column; gap: 3px; margin-right: auto; min-width: 0">
                 <span style="font-size: 14px; font-weight: 600; color: #111111">{{ line.name }}</span>
-                <span style="font-size: 12px; color: #8a8180">{{ line.detail }}</span>
+                <span style="font-size: 12px; color: #6b6462">{{ line.detail }}</span>
               </div>
               <div style="flex: none; display: flex; align-items: center; gap: 4px; border: 1px solid #e6dedc; border-radius: 999px; padding: 3px; background: #fff">
                 <button onClick="{{ line.less }}" aria-label="Diminuir" style="width: 30px; height: 30px; border: 0; border-radius: 999px; background: #faf7f6; color: #E30613; font-size: 17px; line-height: 1; cursor: pointer">−</button>
@@ -233,18 +236,18 @@
 
         <div style="display: flex; flex-direction: column; gap: 18px">
           <label style="display: flex; flex-direction: column; gap: 8px">
-            <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8180; font-weight: 600">Nome</span>
+            <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b6462; font-weight: 600">Nome</span>
             <input value="{{ name }}" onChange="{{ setName }}" placeholder="Seu nome" style="border: 1px solid #e6dedc; border-radius: 12px; padding: 13px 14px; font-size: 16px; color: #111111; background: #fff; outline: none" style-focus="border-color: #E30613" />
           </label>
 
           <label style="display: flex; flex-direction: column; gap: 8px">
-            <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8180; font-weight: 600">Data de retirada / entrega</span>
+            <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b6462; font-weight: 600">Data de retirada / entrega</span>
             <input type="date" value="{{ date }}" onChange="{{ setDate }}" style="border: 1px solid #e6dedc; border-radius: 12px; padding: 13px 14px; font-size: 16px; color: #111111; background: #fff; outline: none" style-focus="border-color: #E30613" />
-            <span style="font-size: 12px; color: #8a8180">{{ dateWarning }}</span>
+            <span style="font-size: 12px; color: #6b6462">{{ dateWarning }}</span>
           </label>
 
           <div style="display: flex; flex-direction: column; gap: 8px">
-            <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8180; font-weight: 600">Como receber</span>
+            <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b6462; font-weight: 600">Como receber</span>
             <div style="display: flex; flex-wrap: wrap; gap: 8px">
               <sc-for list="{{ modes }}" as="m" hint-placeholder-count="2">
                 <button onClick="{{ m.pick }}" style="{{ m.style }}">{{ m.label }}</button>
@@ -253,12 +256,12 @@
           </div>
 
           <label style="display: flex; flex-direction: column; gap: 8px">
-            <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8180; font-weight: 600">Observação <span style="text-transform: none; letter-spacing: 0; color: #b3aaa8">(opcional)</span></span>
+            <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b6462; font-weight: 600">Observação <span style="text-transform: none; letter-spacing: 0; color: #b3aaa8">(opcional)</span></span>
             <textarea value="{{ obs }}" onChange="{{ setObs }}" rows="2" placeholder="Escrita no bolo, bairro para entrega, restrição alimentar…" style="border: 1px solid #e6dedc; border-radius: 12px; padding: 13px 14px; font-size: 16px; color: #111111; background: #fff; outline: none; resize: none" style-focus="border-color: #E30613"></textarea>
           </label>
 
           <div style="display: flex; align-items: baseline; gap: 12px; padding: 16px 0 0; border-top: 1px solid #e6dedc">
-            <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8180; font-weight: 600; margin-right: auto">Total estimado</span>
+            <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #6b6462; font-weight: 600; margin-right: auto">Total estimado</span>
             <span style="font-size: 22px; font-weight: 700; color: #E30613">{{ totalLabel }}</span>
           </div>
 
@@ -402,7 +405,7 @@ class Component extends DCLogic {
       let active = this.state.active;
       for (const s of MENU) {
         const el = document.getElementById(s.id);
-        if (el && el.getBoundingClientRect().top <= 170) active = s.id;
+        if (el && el.getBoundingClientRect().top <= 150) active = s.id;
       }
       if (active !== this.state.active) this.setState({ active });
     };
@@ -412,7 +415,7 @@ class Component extends DCLogic {
 
   goTo(id) {
     const el = document.getElementById(id);
-    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 118, behavior: "smooth" });
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 124, behavior: "smooth" });
   }
 
   bump(key, m, dir) {
@@ -429,7 +432,7 @@ class Component extends DCLogic {
   chip(on) {
     return "border: 1px solid " + (on ? "#E30613" : "#e6dedc") + "; background: " + (on ? "#E30613" : "#fff") +
       "; color: " + (on ? "#fff" : "#3a3535") + "; font-size: 13px; font-weight: " + (on ? "700" : "500") +
-      "; padding: 9px 15px; border-radius: 999px; cursor: pointer; white-space: nowrap";
+      "; padding: 9px 15px; border-radius: 999px; cursor: pointer; white-space: nowrap; flex: 0 0 auto";
   }
 
   renderVals() {
