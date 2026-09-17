@@ -255,6 +255,37 @@
             </div>
           </div>
 
+          <sc-if value="{{ isDelivery }}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; flex-direction: column; gap: 14px; padding: 16px; border: 1px solid #e6dedc; border-radius: 14px">
+              <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #E30613; font-weight: 700">Endereço de entrega</span>
+              <label style="display: flex; flex-direction: column; gap: 7px">
+                <span style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: #6b6462; font-weight: 600">Rua</span>
+                <input value="{{ rua }}" onChange="{{ setRua }}" placeholder="Nome da rua ou avenida" style="border: 1px solid #e6dedc; border-radius: 12px; padding: 13px 14px; font-size: 16px; color: #111111; background: #fff; outline: none" style-focus="border-color: #E30613" />
+              </label>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px">
+                <label style="display: flex; flex-direction: column; gap: 7px">
+                  <span style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: #6b6462; font-weight: 600">Número</span>
+                  <input value="{{ num }}" onChange="{{ setNum }}" placeholder="Nº" style="border: 1px solid #e6dedc; border-radius: 12px; padding: 13px 14px; font-size: 16px; color: #111111; background: #fff; outline: none; min-width: 0" style-focus="border-color: #E30613" />
+                </label>
+                <label style="display: flex; flex-direction: column; gap: 7px">
+                  <span style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: #6b6462; font-weight: 600">Apto / bloco</span>
+                  <input value="{{ apto }}" onChange="{{ setApto }}" placeholder="Opcional" style="border: 1px solid #e6dedc; border-radius: 12px; padding: 13px 14px; font-size: 16px; color: #111111; background: #fff; outline: none; min-width: 0" style-focus="border-color: #E30613" />
+                </label>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px">
+                <label style="display: flex; flex-direction: column; gap: 7px">
+                  <span style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: #6b6462; font-weight: 600">Bairro</span>
+                  <input value="{{ bairro }}" onChange="{{ setBairro }}" placeholder="Bairro" style="border: 1px solid #e6dedc; border-radius: 12px; padding: 13px 14px; font-size: 16px; color: #111111; background: #fff; outline: none; min-width: 0" style-focus="border-color: #E30613" />
+                </label>
+                <label style="display: flex; flex-direction: column; gap: 7px">
+                  <span style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: #6b6462; font-weight: 600">CEP</span>
+                  <input value="{{ cep }}" onChange="{{ setCep }}" inputMode="numeric" placeholder="00000-000" style="border: 1px solid #e6dedc; border-radius: 12px; padding: 13px 14px; font-size: 16px; color: #111111; background: #fff; outline: none; min-width: 0" style-focus="border-color: #E30613" />
+                </label>
+              </div>
+              <span style="font-size: 12px; line-height: 1.5; color: #6b6462">Ponto de referência? Escreva na observação abaixo.</span>
+            </div>
+          </sc-if>
+
           <label style="display: flex; flex-direction: column; gap: 8px">
             <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b6462; font-weight: 600">Observação <span style="text-transform: none; letter-spacing: 0; color: #b3aaa8">(opcional)</span></span>
             <textarea value="{{ obs }}" onChange="{{ setObs }}" rows="2" placeholder="Escrita no bolo, bairro para entrega, restrição alimentar…" style="border: 1px solid #e6dedc; border-radius: 12px; padding: 13px 14px; font-size: 16px; color: #111111; background: #fff; outline: none; resize: none" style-focus="border-color: #E30613"></textarea>
@@ -396,7 +427,8 @@ const qtyText = (q, unit) => {
 };
 
 class Component extends DCLogic {
-  state = { cartOpen: false, active: MENU[0].id, qty: {}, name: "", obs: "", date: "", mode: "Retirar na loja" };
+  state = { cartOpen: false, active: MENU[0].id, qty: {}, name: "", obs: "", date: "",
+    mode: "Entrega (taxa por bairro)", rua: "", num: "", apto: "", bairro: "", cep: "" };
 
   componentDidMount() {
     const d = new Date(Date.now() + 3 * 86400000);
@@ -470,9 +502,15 @@ class Component extends DCLogic {
     const count = lines.length;
     const dateBR = s.date ? s.date.split("-").reverse().join("/") : "";
     const soon = s.date ? (new Date(s.date + "T12:00:00") - Date.now()) < 48 * 3600000 : false;
+    const isDelivery = s.mode.indexOf("Entrega") === 0;
+    const addr = isDelivery
+      ? "\nEndereço: " + [s.rua, s.num, s.apto].filter(Boolean).join(", ") +
+        (s.bairro ? "\nBairro: " + s.bairro : "") + (s.cep ? "\nCEP: " + s.cep : "")
+      : "";
     const msg = "Olá! Gostaria de fazer uma encomenda na Santtini.\n\n" +
       (count ? lines.map((l) => "• " + l.msg).join("\n") + "\n\nTotal estimado: " + brl(total) + "\n\n" : "") +
-      "Nome: " + (s.name || "—") + "\nData: " + (dateBR || "—") + "\n" + s.mode + (s.obs ? "\nObservação: " + s.obs : "");
+      "Nome: " + (s.name || "—") + "\nData: " + (dateBR || "—") + "\n" + s.mode + addr +
+      (s.obs ? "\nObservação: " + s.obs : "");
 
     return {
       sections,
@@ -489,7 +527,14 @@ class Component extends DCLogic {
       phoneLabel: "(41) 9 9714-6521",
       name: s.name, obs: s.obs, date: s.date,
       dateWarning: soon ? "Atenção: encomendas pedem 48h de antecedência." : "Encomendas com 48h de antecedência.",
-      modes: ["Retirar na loja", "Entrega (taxa por bairro)"].map((l) => ({
+      isDelivery: isDelivery,
+      rua: s.rua, num: s.num, apto: s.apto, bairro: s.bairro, cep: s.cep,
+      setRua: (e) => this.setState({ rua: e.target.value }),
+      setNum: (e) => this.setState({ num: e.target.value }),
+      setApto: (e) => this.setState({ apto: e.target.value }),
+      setBairro: (e) => this.setState({ bairro: e.target.value }),
+      setCep: (e) => this.setState({ cep: e.target.value }),
+      modes: ["Entrega (taxa por bairro)", "Retirar na loja"].map((l) => ({
         label: l, style: this.chip(s.mode === l), pick: () => this.setState({ mode: l })
       })),
       setName: (e) => this.setState({ name: e.target.value }),
