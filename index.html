@@ -22,9 +22,9 @@
   input, select, button, textarea { font-family: inherit; }
   @keyframes santCapa {
     0% { opacity: 0; }
-    5% { opacity: 1; }
-    28% { opacity: 1; }
-    33.3% { opacity: 0; }
+    6% { opacity: 1; }
+    25% { opacity: 1; }
+    31% { opacity: 0; }
     100% { opacity: 0; }
   }
   [data-wrap] { max-width: 560px; }
@@ -33,12 +33,12 @@
   @media (min-width: 760px) {
     [data-wrap] { max-width: 920px; }
     [data-grid] { grid-template-columns: 1fr 1fr; }
-    [data-band] { height: 260px; }
+    [data-band] { height: auto; aspect-ratio: 2 / 1; }
   }
   @media (min-width: 1140px) {
     [data-wrap] { max-width: 1180px; }
     [data-grid="three"] { grid-template-columns: 1fr 1fr 1fr; }
-    [data-band] { height: 320px; }
+    [data-band] { height: auto; aspect-ratio: 2 / 1; }
   }
 </style>
 </helmet>
@@ -61,8 +61,9 @@
   <section data-wrap="" style="margin: 0 auto; padding: 18px 18px 4px">
     <div data-band="" style="position: relative; border-radius: 20px; overflow: hidden; background: #faf7f6">
       <img src="./capa-bolo.png" alt="Bolo de festa Santtini" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
-      <img src="./capa-sanduiche.png" alt="Sanduíche Santtini" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: santCapa 18s linear infinite; animation-delay: 6s" />
-      <img src="./capa-cupcakes.png" alt="Cupcakes Santtini" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: santCapa 18s linear infinite; animation-delay: 12s" />
+      <img src="./capa-cupcakes.png" alt="Cupcakes Santtini" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: santCapa 32s linear infinite; animation-delay: 8s" />
+      <img src="./capa-docinhos.png" alt="Bandejas de docinhos Santtini" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: santCapa 32s linear infinite; animation-delay: 16s" />
+      <img src="./capa-salgados.png" alt="Caixas de salgados assados Santtini" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: santCapa 32s linear infinite; animation-delay: 24s" />
       <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 70%; background: linear-gradient(to top, rgba(0,0,0,0.66), rgba(0,0,0,0)); pointer-events: none"></div>
       <div style="position: absolute; left: 20px; right: 20px; bottom: 18px; pointer-events: none">
         <h1 style="margin: 0; color: #fff; font-weight: 700; font-size: 21px; line-height: 1.15; letter-spacing: 0.01em; text-transform: uppercase">Cardápio de<br />Encomendas</h1>
@@ -141,7 +142,7 @@
         </sc-if>
         <sc-if value="{{ sec.sweetsPhoto }}" hint-placeholder-val="{{ false }}">
           <div data-band="" style="position: relative; margin: 26px 0 0; border-radius: 18px; overflow: hidden; background: #faf7f6">
-            <img src="./foto-doces-variados.png" alt="Bandeja de doces e tarteletes" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
+            <img src="./foto-doces-variados.png" alt="Cupcakes de chocolate com morango" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
           </div>
         </sc-if>
         <sc-if value="{{ sec.tartPhoto }}" hint-placeholder-val="{{ false }}">
@@ -151,7 +152,7 @@
         </sc-if>
         <sc-if value="{{ sec.cakePhoto }}" hint-placeholder-val="{{ false }}">
           <div data-band="" style="position: relative; margin: 26px 0 0; border-radius: 18px; overflow: hidden; background: #faf7f6">
-            <img src="./foto-bolo-cenoura.png" alt="Fatia de bolo de cenoura com brigadeiro" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
+            <img src="./foto-bolo-cenoura.png" alt="Bandejas de docinhos e bolo de festa" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
           </div>
         </sc-if>
       </section>
@@ -313,9 +314,9 @@ const EA = { unit: "un", step: 1, min: 1, suffix: "" };
 const MENU = [
   { id: "bolos-de-festa", title: "Bolos de Festa", note: "Pedido mínimo: 1 kg por sabor · encomendas com 48h de antecedência", cols: "two", m: KG,
     cakePhoto: true, items: [
-    { n: "Morango com Suspiro", p: 87.90, d: "Massa: pão de ló branco / Recheio: creme chiffon, morango e suspiro / Cobertura: chantilly, suspiro e morango" },
-    { n: "Morango com Nata", p: 89.90, d: "Massa: pão de ló branco / Recheio: nata e morango / Cobertura: nata, morango e suspiro" },
-    { n: "Chorango", p: 87.90, d: "Massa: pão de ló de chocolate / Recheio: brigadeiro mole e morango / Cobertura: chantilly, ganache e morango" },
+    { n: "Morango com Suspiro", p: 89.90, d: "Massa: pão de ló branco / Recheio: creme chiffon, morango e suspiro / Cobertura: chantilly, suspiro e morango" },
+    { n: "Morango com Nata", p: 92.00, d: "Massa: pão de ló branco / Recheio: nata e morango / Cobertura: nata, morango e suspiro" },
+    { n: "Chorango", p: 89.90, d: "Massa: pão de ló de chocolate / Recheio: brigadeiro mole e morango / Cobertura: chantilly, ganache e morango" },
     { n: "Dois Amores", p: 85.90, d: "Massa: pão de ló branco e de chocolate / Recheio: brigadeiro branco e brigadeiro de chocolate / Cobertura: ganache de chocolate e docinhos dois amores" },
     { n: "Brigadeiro", p: 85.90, d: "Massa: pão de ló de chocolate / Recheio: brigadeiro mole / Cobertura: ganache e docinho brigadeiro" },
     { n: "Prestígio", p: 82.90, d: "Massa: pão de ló de chocolate / Recheio: creme de coco / Cobertura: ganache de chocolate e bombom de prestígio" },
@@ -324,14 +325,14 @@ const MENU = [
     { n: "Kit Kat", p: 98.00, d: "Massa: pão de ló de chocolate / Recheio: mousse de chocolate e kit kat / Cobertura: ganache de chocolate, chantilly e kit kat" },
     { n: "Ferreiro Rocher", p: 98.00, d: "Massa: pão de ló de chocolate / Recheio: creme de avelã / Cobertura: chantilly, ganache e Ferreiro Rocher" },
     { n: "Strogonoff de Nozes", p: 98.00, d: "Massa: pão de ló branco / Recheio: strogonoff de nozes / Cobertura: chantilly, ganache branco e nozes picadas" },
-    { n: "Marta Rocha", p: 87.90, d: "Massa: pão de ló branco e preto / Recheio: baba de moça, strogonoff de nozes, creme de damasco e doce de ameixa / Cobertura: chantilly, crocante, fios de ovos e nozes" },
-    { n: "Abacaxi com Coco", p: 85.90, d: "Massa: pão de ló branco / Recheio: creme chiffon e abacaxi / Cobertura: chantilly e coco fresco" },
+    { n: "Marta Rocha", p: 89.90, d: "Massa: pão de ló branco e preto / Recheio: baba de moça, strogonoff de nozes, creme de damasco e doce de ameixa / Cobertura: chantilly, crocante, fios de ovos e nozes" },
+    { n: "Abacaxi com Coco", p: 89.90, d: "Massa: pão de ló branco / Recheio: creme chiffon e abacaxi / Cobertura: chantilly e coco fresco" },
     { n: "Tropical de Frutas", p: 89.90, d: "Massa: pão de ló branco / Recheio: creme chiffon, abacaxi, pêssego e morango / Cobertura: chantilly, ganache branco e frutas" }
   ]},
   { id: "bolos-secos-recheados", title: "Bolos Secos Recheados", note: "Pedido mínimo: 1 kg por sabor", cols: "three", m: KG, items: [
-    { n: "Cenoura com Brigadeiro", p: 62.90 }, { n: "Cenoura Americano", p: 69.90 },
+    { n: "Cenoura com Brigadeiro", p: 65.90 }, { n: "Cenoura Americano", p: 69.90 },
     { n: "Brownie", p: 79.90 }, { n: "Indiano", p: 65.90 },
-    { n: "Bem Casado", p: 62.90 }, { n: "Toalha Felpuda", p: 62.90 }, { n: "Red Velvet", p: 79.90 }
+    { n: "Bem Casado", p: 65.90 }, { n: "Toalha Felpuda", p: 62.90 }, { n: "Red Velvet", p: 79.90 }
   ]},
   { id: "bolos-secos", title: "Bolos Secos", note: "Pedido mínimo: 1 kg por sabor", cols: "three", m: KG,
     tartPhoto: true, items: [
@@ -389,8 +390,8 @@ const MENU = [
     { n: "Mini Bauru Lombinho c/ Cream Cheese", p: 2.75 }, { n: "Mini Folhado Presunto e Queijo", p: 2.50 },
     { n: "Mini Folhado de Palmito", p: 2.50 }, { n: "Mini Folhado Peito de Peru c/ Queijo", p: 2.50 },
     { n: "Mini Folhado Milho c/ Cream Cheese", p: 2.75 }, { n: "Mini Folhado Tomate Seco c/ Ricota", p: 2.75 },
-    { n: "Mini Folhado de Frango", p: 2.50 }, { n: "Mini Croissant Presunto e Queijo", p: 2.50 },
-    { n: "Mini Croissant de Queijo", p: 2.50 }, { n: "Mini Croissant Peito Peru c/ Queijo", p: 2.50 },
+    { n: "Mini Folhado de Frango", p: 2.50 }, { n: "Mini Croissant Presunto e Queijo", p: 2.75 },
+    { n: "Mini Croissant de Queijo", p: 2.75 }, { n: "Mini Croissant Peito Peru c/ Queijo", p: 2.75 },
     { n: "Mini Quiche Alho Poró com Bacon", p: 2.50 }, { n: "Mini Quiche Quatro Queijos", p: 2.50 },
     { n: "Mini Quiche Tomate Seco c/ Rúcula", p: 2.50 }, { n: "Mini Empada de Frango", p: 2.50 },
     { n: "Mini Empada de Palmito", p: 2.50 }, { n: "Mini Pastel Assado Carne c/ Azeitona", p: 2.95 },
