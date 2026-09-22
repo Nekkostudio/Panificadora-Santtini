@@ -122,7 +122,7 @@
         </sc-if>
         <sc-if value="{{ sec.baguettePhoto }}" hint-placeholder-val="{{ false }}">
           <div data-band="" style="position: relative; margin: 26px 0 0; border-radius: 18px; overflow: hidden; background: #faf7f6">
-            <img src="./foto-baguetes.png" alt="Baguetes montadas na cozinha da Santtini" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
+            <img src="./foto-baguetes.png" alt="Sanduíche de 60 cm montado na baguete com gergelim" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
           </div>
         </sc-if>
         <sc-if value="{{ sec.quichePhoto }}" hint-placeholder-val="{{ false }}">
@@ -186,7 +186,7 @@
       <img src="./logo-santtini-completa.svg" alt="Santtini Panificadora &amp; Confeitaria" style="width: 100%; max-width: 260px; height: auto" />
       <div style="display: flex; flex-direction: column; gap: 8px">
         <span style="font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #6b6462">Confeitaria</span>
-        <span style="font-size: 13.5px; color: #3a3535">(41) 3014-8665 &nbsp;·&nbsp; {{ phoneLabel }} (WhatsApp)</span>
+        <span style="font-size: 13.5px; color: #3a3535">{{ phoneLabel }} (WhatsApp)</span>
         <a href="https://instagram.com/panificadorasanttini" target="_blank" rel="noopener" style="font-size: 13.5px; font-weight: 700">@panificadorasanttini</a>
         <span style="font-size: 12.5px; color: #6b6462">Rua Brasílio Itiberê, 3538 &nbsp;|&nbsp; Água Verde &nbsp;|&nbsp; Curitiba-PR</span>
       </div>
@@ -525,7 +525,7 @@ class Component extends DCLogic {
       cartSub: count ? count + (count === 1 ? " item selecionado" : " itens selecionados") : "Selecione os itens e envie pelo WhatsApp",
       cartCta: count ? "Ver pedido" : "Falar no WhatsApp",
       totalLabel: brl(total),
-      phoneLabel: "(41) 9 9714-6521",
+      phoneLabel: "+55 41 9 9714-6521",
       name: s.name, obs: s.obs, date: s.date,
       dateWarning: soon ? "Atenção: encomendas pedem 48h de antecedência." : "Encomendas com 48h de antecedência.",
       isDelivery: isDelivery,
