@@ -311,49 +311,7 @@ const KG = { unit: "kg", step: 0.5, min: 1, suffix: "/kg" };
 const UN = { unit: "un", step: 25, min: 25, suffix: "/un" };
 const EA = { unit: "un", step: 1, min: 1, suffix: "" };
 
-const MENU = [
-  { id: "bolos-de-festa", title: "Bolos de Festa", note: "Pedido mínimo: 1 kg por sabor · encomendas com 48h de antecedência", cols: "two", m: KG,
-    cakePhoto: true, items: [
-    { n: "Morango com Suspiro", p: 89.90, d: "Massa: pão de ló branco / Recheio: creme chiffon, morango e suspiro / Cobertura: chantilly, suspiro e morango" },
-    { n: "Morango com Nata", p: 92.00, d: "Massa: pão de ló branco / Recheio: nata e morango / Cobertura: nata, morango e suspiro" },
-    { n: "Chorango", p: 89.90, d: "Massa: pão de ló de chocolate / Recheio: brigadeiro mole e morango / Cobertura: chantilly, ganache e morango" },
-    { n: "Dois Amores", p: 85.90, d: "Massa: pão de ló branco e de chocolate / Recheio: brigadeiro branco e brigadeiro de chocolate / Cobertura: ganache de chocolate e docinhos dois amores" },
-    { n: "Brigadeiro", p: 85.90, d: "Massa: pão de ló de chocolate / Recheio: brigadeiro mole / Cobertura: ganache e docinho brigadeiro" },
-    { n: "Prestígio", p: 82.90, d: "Massa: pão de ló de chocolate / Recheio: creme de coco / Cobertura: ganache de chocolate e bombom de prestígio" },
-    { n: "Sonho de Valsa", p: 85.90, d: "Massa: pão de ló de chocolate / Recheio: creme chiffon e bombom sonho de Valsa / Cobertura: chantilly, ganache preto e sonho de Valsa" },
-    { n: "Ouro Branco", p: 85.90, d: "Massa: pão de ló branco / Recheio: creme chiffon e ouro branco / Cobertura: chantilly, ganache branco e ouro branco" },
-    { n: "Kit Kat", p: 98.00, d: "Massa: pão de ló de chocolate / Recheio: mousse de chocolate e kit kat / Cobertura: ganache de chocolate, chantilly e kit kat" },
-    { n: "Ferreiro Rocher", p: 98.00, d: "Massa: pão de ló de chocolate / Recheio: creme de avelã / Cobertura: chantilly, ganache e Ferreiro Rocher" },
-    { n: "Strogonoff de Nozes", p: 98.00, d: "Massa: pão de ló branco / Recheio: strogonoff de nozes / Cobertura: chantilly, ganache branco e nozes picadas" },
-    { n: "Marta Rocha", p: 89.90, d: "Massa: pão de ló branco e preto / Recheio: baba de moça, strogonoff de nozes, creme de damasco e doce de ameixa / Cobertura: chantilly, crocante, fios de ovos e nozes" },
-    { n: "Abacaxi com Coco", p: 89.90, d: "Massa: pão de ló branco / Recheio: creme chiffon e abacaxi / Cobertura: chantilly e coco fresco" },
-    { n: "Tropical de Frutas", p: 89.90, d: "Massa: pão de ló branco / Recheio: creme chiffon, abacaxi, pêssego e morango / Cobertura: chantilly, ganache branco e frutas" }
-  ]},
-  { id: "bolos-secos-recheados", title: "Bolos Secos Recheados", note: "Pedido mínimo: 1 kg por sabor", cols: "three", m: KG, items: [
-    { n: "Cenoura com Brigadeiro", p: 65.90 }, { n: "Cenoura Americano", p: 69.90 },
-    { n: "Brownie", p: 79.90 }, { n: "Indiano", p: 65.90 },
-    { n: "Bem Casado", p: 65.90 }, { n: "Toalha Felpuda", p: 62.90 }, { n: "Red Velvet", p: 79.90 }
-  ]},
-  { id: "bolos-secos", title: "Bolos Secos", note: "Pedido mínimo: 1 kg por sabor", cols: "three", m: KG,
-    tartPhoto: true, items: [
-    { n: "Cenoura c/ cobertura de chocolate", p: 57.90 }, { n: "Laranja", p: 55.90 },
-    { n: "Fubá", p: 49.90 }, { n: "Fubá com Goiaba", p: 55.90 },
-    { n: "Aipim", p: 59.90 }, { n: "Aipim com Coco", p: 59.90 },
-    { n: "Formigueiro", p: 55.90 }, { n: "Mármore", p: 55.90 },
-    { n: "Chocolate com Brigadeiro", p: 55.90 }, { n: "Coco", p: 55.90 }, { n: "Iogurte Natural", p: 55.90 }
-  ]},
-  { id: "tortas", title: "Tortas", note: "Pedido mínimo: 1 kg por sabor", cols: "two", m: KG, items: [
-    { n: "Alemã", p: 80.90, d: "Bolacha de maisena, nata batida e ganache de chocolate" },
-    { n: "Holandesa", p: 80.90, d: "Bolacha de chocolate, creme de cacau com amarula e ganache de chocolate" },
-    { n: "Cheescake Tradicional", p: 85.90, d: "Base: bolacha triturada, creme de cream cheese e geleia de frutas vermelhas" },
-    { n: "Brownie", p: 79.90 }, { n: "Torta de Ricota", p: 55.90 }, { n: "Torta Negresco", p: 79.90 },
-    { n: "Torta de Limão", p: 69.90 }, { n: "Torta de Morango", p: 79.90 }, { n: "Pudim de Leite Condensado", p: 69.90 }
-  ]},
-  { id: "sobremesas", title: "Sobremesas", note: "Pedido mínimo: 1 kg por sabor", cols: "three", m: KG,
-    sweetsPhoto: true, items: [
-    { n: "Profiterolis", p: 89.90 }, { n: "Tiramissu", p: 99.90 }, { n: "Banoffee", p: 85.00 }
-  ]},
-  { id: "docinhos", title: "Docinhos de Festa", note: "Docinhos tradicionais · pedido mínimo: 25 unidades por sabor", cols: "two", m: UN,
+const MENU = [{ id: "docinhos", title: "Docinhos de Festa", note: "Docinhos tradicionais · pedido mínimo: 25 unidades por sabor", cols: "two", m: UN,
     croissantPhoto: true, items: [
     { n: "Brigadeiro Preto", p: 1.95 }, { n: "Brigadeiro Branco", p: 1.95 }, { n: "Dois Amores", p: 1.95 },
     { n: "Beijinho", p: 1.95 }, { n: "Olho de Sogra", p: 1.95 }, { n: "Cajuzinho", p: 1.95 },
@@ -366,23 +324,20 @@ const MENU = [
     { n: "Camafeu de Nozes", p: 3.50 }, { n: "Mini Tartelete de Morango", p: 3.50 }, { n: "Mini Tartelete de Limão", p: 3.50 },
     { n: "Mini Pudim", p: 3.50 }, { n: "Mini Quindim", p: 3.50 }, { n: "Mini Carolina de Brigadeiro", p: 2.95 },
     { n: "Mini Carolina Creme Chiffon", p: 2.95 }, { n: "Mini Carolina Doce de Leite", p: 2.95 }, { n: "Mini Carolina de Limão", p: 2.95 }
-  ]},
-  { id: "outros-doces", title: "Outros Doces", note: "Pedido mínimo: 25 unidades por sabor (itens unitários)", cols: "two", m: UN, items: [
+  ]},{ id: "outros-doces", title: "Outros Doces", note: "Pedido mínimo: 25 unidades por sabor (itens unitários)", cols: "two", m: UN, items: [
     { n: "Mini Croissant de Chocolate", p: 3.20 }, { n: "Mini Folhado Romeu e Julieta", p: 3.20 },
     { n: "Mini Sonho Frito de Goiaba", p: 2.50 }, { n: "Mini Sonho Assado Doce de Leite", p: 3.50 },
     { n: "Mini Sonho Assado de Goiaba", p: 3.50 }, { n: "Lua de Mel Creme Chiffon", p: 3.20 },
     { n: "Mini Cupcake de Chocolate", p: 4.50 }, { n: "Mini Cupcake de Cenoura", p: 4.50 },
     { n: "Mini Cupcake de Baunilha", p: 4.50 },
     { n: "Petit Four Doce Diversos", p: 89.90, m: KG }, { n: "Petit Four Salgado Diversos", p: 89.90, m: KG }
-  ]},
-  { id: "mini-salgados-fritos", title: "Mini Salgados Fritos", note: "Pedido mínimo: 25 unidades por sabor", cols: "two", m: UN,
+  ]},{ id: "mini-salgados-fritos", title: "Mini Salgados Fritos", note: "Pedido mínimo: 25 unidades por sabor", cols: "two", m: UN,
     savoryPhoto: true, items: [
     { n: "Coxinha de Frango", p: 1.85 }, { n: "Risoles de Carne", p: 1.85 },
     { n: "Risoles de Presunto e Queijo", p: 1.85 }, { n: "Bolinha de Queijo", p: 1.85 },
     { n: "Pastelzinho de Carne", p: 1.95 }, { n: "Pastelzinho de Queijo", p: 1.95 },
     { n: "Mini Coxinha Frango c/ Requeijão", p: 2.50 }
-  ]},
-  { id: "salgados-assados", title: "Salgados Assados", note: "Pedido mínimo: 25 unidades por sabor", cols: "two", m: UN,
+  ]},{ id: "salgados-assados", title: "Salgados Assados", note: "Pedido mínimo: 25 unidades por sabor", cols: "two", m: UN,
     quichePhoto: true, items: [
     { n: "Mini Sfiha de Carne", p: 2.50 }, { n: "Mini Sfiha de Frango", p: 2.50 }, { n: "Mini Doguinho", p: 2.50 },
     { n: "Mini Pão de Batata Frango c/ Requeijão", p: 2.50 }, { n: "Mini Pão de Batata Requeijão Cremoso", p: 2.50 },
@@ -399,25 +354,58 @@ const MENU = [
     { n: "Mini Pizza Calabresa", p: 3.50 }, { n: "Mini Pizza Frango com Catupiry", p: 3.50 },
     { n: "Sfiha Aberta de Carne", p: 5.50 }, { n: "Sfiha Aberta de Queijo", p: 5.50 },
     { n: "Mini Pão de Queijo", p: 2.20 }, { n: "Mini Palitinho de Queijo", p: 2.20 }, { n: "Mini Chipa", p: 2.20 }
-  ]},
-  { id: "tortas-frias", title: "Tortas Frias, Empadões e Quiches", note: "Pedido mínimo: 1 kg por sabor", cols: "two", m: KG, items: [
+  ]},{ id: "tortas-frias", title: "Tortas Frias, Empadões e Quiches", note: "Pedido mínimo: 1 kg por sabor", cols: "two", m: KG, items: [
     { n: "Empadão de Frango com Requeijão", p: 82.90 }, { n: "Empadão de Palmito", p: 82.90 },
     { n: "Quiche Alho Poró com Bacon", p: 82.90 }, { n: "Quiche Quatro Queijos", p: 82.90 },
     { n: "Torta de Legumes", p: 62.90 }, { n: "Torta de Frango com Grão de Bico", p: 69.90 },
     { n: "Torta Fria de Frango", p: 65.90 }
-  ]},
-  { id: "mini-sanduiches", title: "Mini Sanduíches", note: "Opções de pães: brioche, francês e integral · pedido mínimo: 25 unidades por sabor", cols: "two", m: UN,
+  ]},{ id: "mini-sanduiches", title: "Mini Sanduíches", note: "Opções de pães: brioche, francês e integral · pedido mínimo: 25 unidades por sabor", cols: "two", m: UN,
     baguettePhoto: true, items: [
     { n: "Salame Italiano", p: 4.50, d: "Salame italiano, queijo, alface e tomate" },
     { n: "Presunto e Queijo", p: 3.95, d: "Presunto e queijo, alface e tomate" },
     { n: "Peito de Peru", p: 3.95, d: "Peito de peru com queijo, alface e tomate" },
     { n: "Salpicão de Frango", p: 3.95, d: "Salpicão de frango, alface e tomate" }
-  ]},
-  { id: "sanduiche-60", title: "Sanduíche 60 cm", note: "Serve em média 5 pessoas", cols: "two", m: EA, items: [
+  ]},{ id: "sanduiche-60", title: "Sanduíche 60 cm", note: "Serve em média 5 pessoas", cols: "two", m: EA, items: [
     { n: "Italiano", p: 120.00, d: "Salame italiano, queijo mussarela, alface, tomate, maionese — na baguete com parmesão" },
     { n: "Presunto e Queijo", p: 110.00, d: "Presunto e queijo, maionese, alface e tomate — na baguete tradicional" },
     { n: "Peito de Peru", p: 115.00, d: "Peito de peru, queijo, alface, tomate, maionese — na baguete tradicional com gergelim" },
     { n: "Vegetariano", p: 120.00, d: "Pastinha de tomate seco com ricota, alface, rúcula, cenoura ralada, palmito — na baguete integral com gergelim" }
+  ]},{ id: "bolos-de-festa", title: "Bolos de Festa", note: "Pedido mínimo: 1 kg por sabor · encomendas com 48h de antecedência", cols: "two", m: KG,
+    cakePhoto: true, items: [
+    { n: "Morango com Suspiro", p: 89.90, d: "Massa: pão de ló branco / Recheio: creme chiffon, morango e suspiro / Cobertura: chantilly, suspiro e morango" },
+    { n: "Morango com Nata", p: 92.00, d: "Massa: pão de ló branco / Recheio: nata e morango / Cobertura: nata, morango e suspiro" },
+    { n: "Chorango", p: 89.90, d: "Massa: pão de ló de chocolate / Recheio: brigadeiro mole e morango / Cobertura: chantilly, ganache e morango" },
+    { n: "Dois Amores", p: 85.90, d: "Massa: pão de ló branco e de chocolate / Recheio: brigadeiro branco e brigadeiro de chocolate / Cobertura: ganache de chocolate e docinhos dois amores" },
+    { n: "Brigadeiro", p: 85.90, d: "Massa: pão de ló de chocolate / Recheio: brigadeiro mole / Cobertura: ganache e docinho brigadeiro" },
+    { n: "Prestígio", p: 82.90, d: "Massa: pão de ló de chocolate / Recheio: creme de coco / Cobertura: ganache de chocolate e bombom de prestígio" },
+    { n: "Sonho de Valsa", p: 85.90, d: "Massa: pão de ló de chocolate / Recheio: creme chiffon e bombom sonho de Valsa / Cobertura: chantilly, ganache preto e sonho de Valsa" },
+    { n: "Ouro Branco", p: 85.90, d: "Massa: pão de ló branco / Recheio: creme chiffon e ouro branco / Cobertura: chantilly, ganache branco e ouro branco" },
+    { n: "Kit Kat", p: 98.00, d: "Massa: pão de ló de chocolate / Recheio: mousse de chocolate e kit kat / Cobertura: ganache de chocolate, chantilly e kit kat" },
+    { n: "Ferreiro Rocher", p: 98.00, d: "Massa: pão de ló de chocolate / Recheio: creme de avelã / Cobertura: chantilly, ganache e Ferreiro Rocher" },
+    { n: "Strogonoff de Nozes", p: 98.00, d: "Massa: pão de ló branco / Recheio: strogonoff de nozes / Cobertura: chantilly, ganache branco e nozes picadas" },
+    { n: "Marta Rocha", p: 89.90, d: "Massa: pão de ló branco e preto / Recheio: baba de moça, strogonoff de nozes, creme de damasco e doce de ameixa / Cobertura: chantilly, crocante, fios de ovos e nozes" },
+    { n: "Abacaxi com Coco", p: 89.90, d: "Massa: pão de ló branco / Recheio: creme chiffon e abacaxi / Cobertura: chantilly e coco fresco" },
+    { n: "Tropical de Frutas", p: 89.90, d: "Massa: pão de ló branco / Recheio: creme chiffon, abacaxi, pêssego e morango / Cobertura: chantilly, ganache branco e frutas" }
+  ]},{ id: "bolos-secos-recheados", title: "Bolos Secos Recheados", note: "Pedido mínimo: 1 kg por sabor", cols: "three", m: KG, items: [
+    { n: "Cenoura com Brigadeiro", p: 65.90 }, { n: "Cenoura Americano", p: 69.90 },
+    { n: "Brownie", p: 79.90 }, { n: "Indiano", p: 65.90 },
+    { n: "Bem Casado", p: 65.90 }, { n: "Toalha Felpuda", p: 62.90 }, { n: "Red Velvet", p: 79.90 }
+  ]},{ id: "bolos-secos", title: "Bolos Secos", note: "Pedido mínimo: 1 kg por sabor", cols: "three", m: KG,
+    tartPhoto: true, items: [
+    { n: "Cenoura c/ cobertura de chocolate", p: 57.90 }, { n: "Laranja", p: 55.90 },
+    { n: "Fubá", p: 49.90 }, { n: "Fubá com Goiaba", p: 55.90 },
+    { n: "Aipim", p: 59.90 }, { n: "Aipim com Coco", p: 59.90 },
+    { n: "Formigueiro", p: 55.90 }, { n: "Mármore", p: 55.90 },
+    { n: "Chocolate com Brigadeiro", p: 55.90 }, { n: "Coco", p: 55.90 }, { n: "Iogurte Natural", p: 55.90 }
+  ]},{ id: "tortas", title: "Tortas", note: "Pedido mínimo: 1 kg por sabor", cols: "two", m: KG, items: [
+    { n: "Alemã", p: 80.90, d: "Bolacha de maisena, nata batida e ganache de chocolate" },
+    { n: "Holandesa", p: 80.90, d: "Bolacha de chocolate, creme de cacau com amarula e ganache de chocolate" },
+    { n: "Cheescake Tradicional", p: 85.90, d: "Base: bolacha triturada, creme de cream cheese e geleia de frutas vermelhas" },
+    { n: "Brownie", p: 79.90 }, { n: "Torta de Ricota", p: 55.90 }, { n: "Torta Negresco", p: 79.90 },
+    { n: "Torta de Limão", p: 69.90 }, { n: "Torta de Morango", p: 79.90 }, { n: "Pudim de Leite Condensado", p: 69.90 }
+  ]},{ id: "sobremesas", title: "Sobremesas", note: "Pedido mínimo: 1 kg por sabor", cols: "three", m: KG,
+    sweetsPhoto: true, items: [
+    { n: "Profiterolis", p: 89.90 }, { n: "Tiramissu", p: 99.90 }, { n: "Banoffee", p: 85.00 }
   ]}
 ];
 
